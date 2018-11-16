@@ -9,6 +9,7 @@ class kelompok extends Model
     protected $table = 'kelompoks';
     Protected $fillable = [
         'id',
+        'daerahs_id',
         'desas_id', 
         'name'
     ];

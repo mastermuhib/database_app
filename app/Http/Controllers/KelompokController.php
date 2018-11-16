@@ -14,9 +14,9 @@ class KelompokController extends Controller
      */
     public function index()
     {
-      $kelompoks = DB::table('desas')
-            ->leftJoin('daerahs', 'daerahs.id', '=', 'desas.daerahs_id')
-            ->leftJoin('kelompoks', 'desas.id', '=', 'kelompoks.desas_id')
+      $kelompoks = DB::table('kelompoks')
+            ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
+            ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
             ->select('daerahs.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
             ->get();
 
@@ -56,6 +56,7 @@ class KelompokController extends Controller
         $kelompok= new \App\kelompok;
         $kelompok->name=$request->get('name');
         $kelompok->desas_id=$request->get('desas_id');
+        $kelompok->daerahs_id=$request->get('daerahs_id');
         $kelompok->save();
    
         return redirect()->route('kelompok.index')
