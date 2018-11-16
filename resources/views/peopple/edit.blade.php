@@ -1,4 +1,4 @@
-@extends('people.layout')
+@extends('peopple.layout')
    
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Edit Product</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('people.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('peopple.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         </div>
     @endif
   
-    <form action="{{ route('people.update',$people['id']) }}" method="POST">
+    <form action="{{ route('peopple.update',$peopple['id']) }}" method="POST">
         @csrf
         @method('PUT')
    
@@ -31,7 +31,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name" value="{{ $people->name }}" class="form-control" placeholder="Name">
+                    <input type="text" name="name" value="{{ $peopple->name }}" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

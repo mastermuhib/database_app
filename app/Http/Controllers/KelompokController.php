@@ -17,7 +17,7 @@ class KelompokController extends Controller
       $kelompoks = DB::table('kelompoks')
             ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
             ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
-            ->select('daerahs.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
+            ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
             ->get();
 
         return view('kelompok.index', ['kelompok' => $kelompoks]);

@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/getdesa/{id}', 'KelompokController@getdesa');
+Route::get('/getkelompok/{id}', 'PeoppleController@getkelompok');
 Route::resource('daerah','DaerahController');
 Route::get('/daerah/create', function () {
     return view('/daerah.create');
@@ -28,7 +29,7 @@ Route::get('/desa/create', function () {
     return view('/desa.create');
 });
 Route::resource('kelompok','KelompokController');
-Route::resource('people','PeopleController');
-Route::get('/people/create', function () {
-    return view('/people.create');
+Route::resource('peopple','PeoppleController');
+Route::get('/peopple/create', function () {
+    return view('/peopple.create');
 });

@@ -17,7 +17,7 @@ class DesaController extends Controller
     {
         $desas = DB::table('desas')
             ->leftJoin('daerahs', 'daerahs.id', '=', 'desas.daerahs_id')
-            ->select('daerahs.id as id','daerahs.name as name1', 'desas.name as name2')
+            ->select('desas.id as id','daerahs.name as name1', 'desas.name as name2')
             ->get();
 
         return view('desa.index', ['desa' => $desas]);
