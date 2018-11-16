@@ -1,4 +1,4 @@
-@extends('daerah.layout')
+@extends('layouts.apps') 
   
 @section('content')
 <div class="row">
