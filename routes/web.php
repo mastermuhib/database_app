@@ -14,6 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('coba','PeoppleController');
+Route::get('/coba1', function () {
+    return view('coba');
+});
+Route::get('/coba2', function () {
+    return view('layouts.apps');
+});
 
 Auth::routes();
 
