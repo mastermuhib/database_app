@@ -38,7 +38,7 @@
 
  
     
-                    <a class="btn btn-primary" href="{{ route('desa.edit',$product->id) }}">Edit||{{ $product->id }}</a>
+                    <a class="btn btn-primary" href="{{ route('desa.edit',$product->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')

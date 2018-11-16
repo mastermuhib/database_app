@@ -64,6 +64,7 @@
         </div>
         <div class="form-group">PILIH STATUS
               <select name="status">
+                      <option value=''>Pilih status</option>
                       <option value="Dewasa">Dewasa</option>
                       <option value="Remaja">Remaja</option>
                       <option value="Anak-Anak">Anak-Anak</option>      
