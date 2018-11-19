@@ -26,44 +26,27 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="menu-icon mdi mdi-content-copy"></i>
-              <span class="menu-title">Basic UI Elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="{{asset('assets/pages/ui-features/buttons.html')}}">Buttons</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{asset('assets/pages/ui-features/typography.html')}}">Typography</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{asset('assets/pages/forms/basic_elements.html')}}">
+            <a class="nav-link" href="{{ url('daerah')}}">
               <i class="menu-icon mdi mdi-backup-restore"></i>
-              <span class="menu-title">Form elements</span>
+              <span class="menu-title">DAERAH</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{asset('assets/pages/charts/chartjs.html')}}">
+            <a class="nav-link" href="{{ url('desa')}}">
               <i class="menu-icon mdi mdi-chart-line"></i>
-              <span class="menu-title">Charts</span>
+              <span class="menu-title">DESA</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{asset('assets/pages/tables/basic-table.html')}}">
+            <a class="nav-link" href="{{ url('kelompok')}}">
               <i class="menu-icon mdi mdi-table"></i>
-              <span class="menu-title">Tables</span>
+              <span class="menu-title">KELOMPOK</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{asset('assets/pages/icons/font-awesome.html')}}">
+            <a class="nav-link" href="{{ url('peopple')}}">
               <i class="menu-icon mdi mdi-sticker"></i>
-              <span class="menu-title">Icons</span>
+              <span class="menu-title">PEOPLE</span>
             </a>
           </li>
           <li class="nav-item">
@@ -74,21 +57,34 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/login.html"> Login </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/register.html"> Register </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/error-404.html"> 404 </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/error-500.html"> 500 </a>
-                </li>
+                @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                @if (Route::has('register'))
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @endif
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
               </ul>
             </div>
           </li>
