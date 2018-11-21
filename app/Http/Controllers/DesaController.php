@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
 
 class DesaController extends Controller
 {
@@ -15,11 +16,26 @@ class DesaController extends Controller
      */
     public function index()
     {   
+    ?>
+        @if (Route::has('login'))
+        @auth
+    <?php $i = Auth::user()->daerahs_id ;?>
+    <?php $u = Auth::user()->rules_id ;?>
+        @endauth
+        @endif
+    <?php
+        if ($u == 1){
+                        $desas = DB::table('desas')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'desas.daerahs_id')
+                        ->select('desas.id as id','daerahs.name as name1', 'desas.name as name2')
+                        ->get();
+        } else {
         $desas = DB::table('desas')
             ->leftJoin('daerahs', 'daerahs.id', '=', 'desas.daerahs_id')
             ->select('desas.id as id','daerahs.name as name1', 'desas.name as name2')
+            ->where('daerahs.id','=', $i)
             ->get();
-
+        }
         return view('desa.index', ['desa' => $desas]);
     }
     /**

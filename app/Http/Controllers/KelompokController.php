@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\kelompok;
 use Illuminate\Http\Request;
+use Auth;
 
 class KelompokController extends Controller
 {
@@ -14,11 +15,36 @@ class KelompokController extends Controller
      */
     public function index()
     {
-      $kelompoks = DB::table('kelompoks')
-            ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
-            ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
-            ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
-            ->get();
+    ?>
+        @if (Route::has('login'))
+        @auth
+    <?php $d = Auth::user()->daerahs_id ;?>
+    <?php $i = Auth::user()->desas_id ;?>
+    <?php $u = Auth::user()->rules_id ;?>
+        @endauth
+        @endif
+    <?php
+        if ($u == 1){
+                      $kelompoks = DB::table('kelompoks')
+                            ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
+                            ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
+                            ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
+                            ->get();
+        } elseif ($u == 2){
+                      $kelompoks = DB::table('kelompoks')
+                            ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
+                            ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
+                            ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
+                            ->where('daerahs.id','=', $d)
+                            ->get();
+        } else {
+                        $kelompoks = DB::table('kelompoks')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
+                        ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
+                        ->where('desas.id','=', $i)
+                        ->get();
+        }
 
         return view('kelompok.index', ['kelompok' => $kelompoks]);
     }

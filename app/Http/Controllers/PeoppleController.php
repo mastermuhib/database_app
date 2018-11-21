@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Peopple;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class PeoppleController extends Controller
 {
@@ -15,12 +16,48 @@ class PeoppleController extends Controller
      */
     public function index()
     {
-        $peopples = DB::table('peopples')
-            ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
-            ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
-            ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
-            ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
-            ->get();
+    ?>
+        @if (Route::has('login'))
+        @auth
+            <?php $d = Auth::user()->daerahs_id ;?>
+            <?php $ds = Auth::user()->desas_id ;?>
+            <?php $i = Auth::user()->kelompoks_id ;?>
+            <?php $u = Auth::user()->rules_id ;?>
+        @endauth
+        @endif
+    <?php
+        if ($u == 1){
+                    $peopples = DB::table('peopples')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                        ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                        ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                        ->get();
+        }elseif ($u == 2){
+                    $peopples = DB::table('peopples')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                        ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                        ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                        ->where('daerahs.id','=', $d)
+                        ->get();
+        }elseif ($u == 3){
+                    $peopples = DB::table('peopples')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                        ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                        ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                        ->where('desas.id','=', $ds)
+                        ->get();
+        } else {
+                    $peopples = DB::table('peopples')
+                    ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                    ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                    ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                    ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                    ->where('kelompoks.id','=', $i)
+                    ->get();
+        }
 
         return view('peopple.index', ['peopple' => $peopples]);
     }
