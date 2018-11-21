@@ -7,14 +7,14 @@
                   <img src="{{asset('assets/images/faces/face1.jpg')}}" alt="profile image">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Richard V.Welsh</p>
+                  <p class="profile-name">{{ Auth::user()->name }}</p>
                   <div>
                     <small class="designation text-muted">Manager</small>
                     <span class="status-indicator online"></span>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">New Project
+              <button class="btn btn-success btn-block">ADD USERS
                 <i class="mdi mdi-plus"></i>
               </button>
             </div>
