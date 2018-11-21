@@ -39,6 +39,28 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+                            <label for="Hak akses" class="col-sm-4 col-form-label text-md-right">{{ __('Hak Akses') }}</label>
+
+                            <div class="col-md-6">
+                                <!-- <input id="rules_id" type="text" class="form-control{{ $errors->has('rules_id') ? ' is-invalid' : '' }}" name="rules_id" value="{{ old('rules_id') }}" required autofocus> -->
+                                <select name="rules_id" id="rules_id" class="form-control">
+                                      <option value=''>Pilih Hak Akses</option>
+                                      <option value='1'>super admin</option>
+                                      <option value='2'>admin daerah</option>
+                                      <option value='3'>admin desa</option>
+                                      <option value='4'>admin kelompok</option>
+                                </select>
+
+                                @if ($errors->has('rules_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('rules_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">

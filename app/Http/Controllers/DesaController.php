@@ -14,7 +14,7 @@ class DesaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $desas = DB::table('desas')
             ->leftJoin('daerahs', 'daerahs.id', '=', 'desas.daerahs_id')
             ->select('desas.id as id','daerahs.name as name1', 'desas.name as name2')

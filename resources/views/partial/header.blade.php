@@ -24,6 +24,8 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
+     @if (Route::has('login'))
+        @auth
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <i class="mdi mdi-file-document-box"></i>
@@ -173,6 +175,20 @@
                                     </form>
             </div>
           </li>
+          @else
+                        
+                          <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link">You are not login
+                              <span class="badge badge-primary ml-1">login</span>
+                            </a>
+                          </li> 
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="nav-link">
+                              <span class="badge badge-primary ml-1">register</span>
+                            </a>
+                        @endif
+                    @endauth
+            @endif
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>

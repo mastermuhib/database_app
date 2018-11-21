@@ -32,3 +32,7 @@ Route::resource('peopple','PeoppleController');
 Route::get('/peopple/create', function () {
     return view('/peopple.create');
 });
+Route::resource('users','UserController');
+Route::get('/users/create', function () {
+    return view('/users.create');
+});
