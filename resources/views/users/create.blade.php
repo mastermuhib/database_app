@@ -1,10 +1,10 @@
 @extends('layouts.apps') 
 @section('content')
-<div class="container" style="padding-top: 200px; vertical-align: middle;">
+<div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Menambahkan User baru') }}</div>
+                <div class="card-header">{{ __('Menambahkan User baru') }} || <a class="btn btn-danger" href="{{ route('users.index') }}"> Back</a></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('users.store') }}">
@@ -59,8 +59,41 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Hak Akses') }}</label>
+                        <div class="form-group row">
+                            <label for="daerah" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
+                              <div class="col-md-6">
+                                <select class="form-control" name="daerahs_id" id="daerah">
+                                      <option value=''>Pilih Daerah</option>
+                                            @foreach(App\daerah::get() as $daerah)
+                                            <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
+                                            @endforeach
+                                </select>
+                              </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="desa" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
+                              <div class="col-md-6">
+                                <select class="form-control" name="desas_id" id="desa">
+                                      <option value=''>Pilih desa</option>
+                                            <!-- @foreach(App\daerah::get() as $daerah)
+                                            <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
+                                            @endforeach -->
+                                </select>
+                              </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kelompok" class="col-md-4 col-form-label text-md-right">{{ __('KELOMPOK') }}</label>
+                              <div class="col-md-6">
+                                <select class="form-control" name="kelompoks_id" id="kelompok">
+                                      <option value=''>Pilih Kelompok</option>
+                                            <!-- @foreach(App\daerah::get() as $daerah)
+                                            <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
+                                            @endforeach -->
+                                </select>
+                              </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="hak akses" class="col-md-4 col-form-label text-md-right">{{ __('Hak Akses') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="rules_id" id="rules_id">
                                       <option value=''>Pilih Hak Akses</option>
@@ -70,7 +103,8 @@
                                       <option value='4'>admin kelompok</option>
                                 </select>
                               </div>
-                       </div>
+                        </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

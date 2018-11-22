@@ -32,7 +32,7 @@
             <td>{{ $product->id}}</td>
             <td>{{ $product->name }}</td>
             <td>
-                <form action="{{ route('daerah.destroy',$product['id']) }}" method="POST">
+                <form action="{{ route('daerah.destroy',$product->id) }}" method="POST">
    
                     <a class="btn btn-info" href="{{ route('daerah.show',$product->id) }}">Show</a>
 
@@ -49,8 +49,5 @@
         </tr>
         <?php $no++; ?>
         @endforeach
-    </table>
-  
-    {!! $daerah->links() !!}
-      
+    </table>      
 @endsection

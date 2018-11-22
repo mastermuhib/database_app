@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -43,9 +44,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-  
-        User::create($request->all());
-   
+        $user= new \App\User;
+        $user->name=$request->get('name');
+        $user->email=$request->get('email');
+        $user->rules_id=$request->get('rules_id');
+        $user->password=Hash::make($request->get('password'));
+        $user->daerahs_id=$request->get('daerahs_id');
+        $user->desas_id=$request->get('desas_id');
+        $user->kelompoks_id=$request->get('kelompoks_id');
+        $user->save();   
         return redirect()->route('users.index')
                         ->with('success','users created successfully.');
     }

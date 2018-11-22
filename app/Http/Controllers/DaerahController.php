@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\daerah;
+use Auth;
 
 class DaerahController extends Controller
 {
@@ -15,10 +17,25 @@ class DaerahController extends Controller
     public function index()
     {
         // $daerah = DB::table('daerah')->get();
-        $daerah = daerah::latest()->paginate(5);
-  
-        return view('daerah.index',compact('daerah'));
-        with('i', (request()->input('page', 1) - 1) * 5);
+        ?>
+        @if (Route::has('login'))
+        @auth
+    <?php $i = Auth::user()->daerahs_id ;?>
+    <?php $u = Auth::user()->rules_id ;?>
+        @endauth
+        @endif
+    <?php
+        if ($u == 1){
+                        $daerah = DB::table('daerahs')
+                        ->select('id','name')
+                        ->get();
+        } else {
+                        $daerah = DB::table('daerahs')
+                        ->select('id','name')
+                        ->where('id','=', $i)
+                        ->get();
+        }
+        return view('daerah.index', ['daerah' => $daerah]);
     }
 
     /**
