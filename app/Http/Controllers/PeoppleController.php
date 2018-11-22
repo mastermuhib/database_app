@@ -32,7 +32,7 @@ class PeoppleController extends Controller
                         ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
                         ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
-                        ->get();
+                        ->paginate(7);
         }elseif ($u == 2){
                     $peopples = DB::table('peopples')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
@@ -40,7 +40,7 @@ class PeoppleController extends Controller
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
                         ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
                         ->where('daerahs.id','=', $d)
-                        ->get();
+                        ->paginate(7);
         }elseif ($u == 3){
                     $peopples = DB::table('peopples')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
@@ -48,7 +48,7 @@ class PeoppleController extends Controller
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
                         ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
                         ->where('desas.id','=', $ds)
-                        ->get();
+                        ->paginate(7);
         } else {
                     $peopples = DB::table('peopples')
                     ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
@@ -56,7 +56,7 @@ class PeoppleController extends Controller
                     ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
                     ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
                     ->where('kelompoks.id','=', $i)
-                    ->get();
+                    ->paginate(7);
         }
 
         return view('peopple.index', ['peopple' => $peopples]);

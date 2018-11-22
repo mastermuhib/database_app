@@ -1,5 +1,4 @@
 @extends('layouts.apps') 
- 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -30,13 +29,13 @@
         @foreach ($user as $product)
         <?php if ($product->rules_id == 1) {
             $akses = "super admin";
-              }elseif ($product->rules_id == 2) {
+              } elseif ($product->rules_id == 2) {
             $akses = "admin daerah";
-              }elseif ($product->rules_id == 3) {
+              } elseif ($product->rules_id == 3) {
             $akses = "admin desa";
-              }elseif ($product->rules_id == 4) {
+              } elseif ($product->rules_id == 4) {
             $akses = "admin kelompok";
-              }else {
+              } else {
             $akses = "anggota baru";   
               }
         ?>
@@ -63,5 +62,8 @@
         </tr>
         <?php $no++; ?>
         @endforeach
-    </table>      
+    </table> 
+<div style="padding-top: 50px;">
+    {{ $user->links() }}
+</div>      
 @endsection

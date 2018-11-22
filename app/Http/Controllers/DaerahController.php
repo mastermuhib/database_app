@@ -28,7 +28,7 @@ class DaerahController extends Controller
         if ($u == 1){
                         $daerah = DB::table('daerahs')
                         ->select('id','name')
-                        ->get();
+                        ->paginate(5);
         } else {
                         $daerah = DB::table('daerahs')
                         ->select('id','name')

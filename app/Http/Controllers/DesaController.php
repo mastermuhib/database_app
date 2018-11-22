@@ -28,13 +28,13 @@ class DesaController extends Controller
                         $desas = DB::table('desas')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'desas.daerahs_id')
                         ->select('desas.id as id','daerahs.name as name1', 'desas.name as name2')
-                        ->get();
+                        ->paginate(7);
         } else {
         $desas = DB::table('desas')
             ->leftJoin('daerahs', 'daerahs.id', '=', 'desas.daerahs_id')
             ->select('desas.id as id','daerahs.name as name1', 'desas.name as name2')
             ->where('daerahs.id','=', $i)
-            ->get();
+            ->paginate(7);
         }
         return view('desa.index', ['desa' => $desas]);
     }

@@ -1,5 +1,4 @@
 @extends('layouts.apps') 
- 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -50,4 +49,7 @@
         <?php $no++; ?>
         @endforeach
     </table>
+<div style="padding-top: 10px;">
+    {{ $desa->links() }}
+</div>   
 @endsection

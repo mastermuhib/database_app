@@ -29,21 +29,21 @@ class KelompokController extends Controller
                             ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
                             ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
                             ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
-                            ->get();
+                            ->paginate(7);
         } elseif ($u == 2){
                       $kelompoks = DB::table('kelompoks')
                             ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
                             ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
                             ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
                             ->where('daerahs.id','=', $d)
-                            ->get();
+                            ->paginate(7);
         } else {
                         $kelompoks = DB::table('kelompoks')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'kelompoks.daerahs_id')
                         ->leftJoin('desas', 'desas.id', '=', 'kelompoks.desas_id')
                         ->select('kelompoks.id as id','daerahs.name as name1','kelompoks.name as name3', 'desas.name as name2')
                         ->where('desas.id','=', $i)
-                        ->get();
+                        ->paginate(7);
         }
 
         return view('kelompok.index', ['kelompok' => $kelompoks]);

@@ -1,5 +1,4 @@
 @extends('layouts.apps')
- 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -18,7 +17,7 @@
         </div>
     @endif
    
-    <table class="table table-bordered">
+    <table class="table table-bordered datatable">
         <tr>
             <th>NOMOR</th>
             <th>Name Daerah</th>
@@ -54,4 +53,7 @@
         <?php $no++; ?>
         @endforeach
     </table>
+<div style="padding-top: 10px;">
+    {{ $peopple->links() }}
+</div>
 @endsection

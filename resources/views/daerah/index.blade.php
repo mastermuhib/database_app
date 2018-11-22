@@ -49,5 +49,9 @@
         </tr>
         <?php $no++; ?>
         @endforeach
-    </table>      
+    </table>
+    <div style="padding-top: 50px;">
+    {{ $daerah->links() }}
+    </div> 
+     
 @endsection

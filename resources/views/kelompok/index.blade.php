@@ -52,4 +52,7 @@
         <?php $no++; ?>
         @endforeach
     </table>
+<div style="padding-top: 10px;">
+    {{ $kelompok->links() }}
+</div>
 @endsection
