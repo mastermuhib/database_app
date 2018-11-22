@@ -1,5 +1,4 @@
-@extends('layouts.apps') 
-  
+@extends('layouts.apps')   
 @section('content')
 @if (Route::has('login'))
 @auth
@@ -19,7 +18,9 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
                                     <div class="col-md-6">
-                                        <input id="daerahs_id" type="text" class="form-control" placeholder="" readonly name="daerahs_id" value="<?php echo $i ;?>" required autofocus>
+                                        <select name="daerahs_id" class="form-control"><option value='<?php echo $i ;?>'>PILIH DAERAH</option>
+                                                <option value='<?php echo $i ;?>'><?php echo $i ;?></option>
+                                        </select>
                                     </div>
                                 </div>
                                 </div>

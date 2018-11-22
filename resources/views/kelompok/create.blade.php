@@ -5,6 +5,7 @@
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
 <?php $i = Auth::user()->daerahs_id ; ?>
+<?php $ds = Auth::user()->desas_id ; ?>
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,16 +15,14 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('kelompok.store') }}">
                         @csrf
-                        <?php if ($st == 2 ) {?>
-                                <div class="d-lg-none">
+                        <?php if ($st == 2 or $st == 3 ) {?>
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
                                     <div class="col-md-6">
-                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value=''>PILIH DAERAH</option>
-                                                <option value='<?php echo $i ;?>'><?php echo $i ;?></option>
+                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value='<?php echo $i ;?>'>please klick<?php echo $st;?></option>
+                                                <option value='<?php echo $i ;?>'>please klick this tombol</option>
                                         </select>
                                     </div>
-                                </div>
                                 </div>
                         <?php }else { ?>
                             <div class="form-group row">
@@ -37,15 +36,25 @@
                                 </div>
                             </div>
                         <?php } ?>
-                        <div class="form-group row">
-                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
-                                <div class="col-md-6">
-                                    <select name="desas_id" class="form-control" id="desa">
-                                    <option value=''>Pilih Desa<?php echo $i ;?></option>
-                                    </select>
+                        <?php if ($st == 3 ) {?>
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
+                                    <div class="col-md-6">
+                                        <select name="desas_id" class="form-control"><option value='<?php echo $ds ;?>'>please klick<?php echo $st;?></option>
+                                                <option value='<?php echo $ds ;?>'>please klick this tombol</option>
+                                        </select>
+                                    </div>
                                 </div>
-                        </div>
-
+                        <?php }else { ?>
+                                <div class="form-group row">
+                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
+                                        <div class="col-md-6">
+                                            <select name="desas_id" class="form-control" id="desa">
+                                            <option value=''>Pilih Desa<?php echo $i ;?></option>
+                                            </select>
+                                        </div>
+                                </div>
+                         <?php } ?>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 

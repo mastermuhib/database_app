@@ -1,83 +1,147 @@
 @extends('layouts.apps') 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>tambah peopple baru</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('peopple.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-   
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-   
-<form action="{{ route('peopple.store') }}" method="POST">
-    @csrf
-  
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">PILIH DAERAH
-                    <select name="daerahs_id" id="daerah">
-                    <option value="">Pilih Daerah</option>
-                    @foreach(App\daerah::get() as $daerah)
-                        <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
-                    @endforeach
-                    </select>
+@if (Route::has('login'))
+@auth
+<?php $st = Auth::user()->rules_id ; ?>
+<?php $i = Auth::user()->daerahs_id ; ?>
+<?php $ds = Auth::user()->desas_id ; ?>
+<?php $kl = Auth::user()->kelompoks_id ; ?>
+<div class="container" style="vertical-align: middle; position: relative;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">{{ __('Menambahkan Poeple baru') }} || <a class="btn btn-danger" href="{{ route('peopple.index') }}"> Back</a></div>
+                <div class="card-body">
+                                <form action="{{ route('peopple.store') }}" method="POST">
+                                    @csrf
+                       <?php if ($st == 1 ) {?>
+                          <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
+                                <div class="col-md-6">
+                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value=''>PILIH DAERAH<?php echo $st;?></option>
+                                                @foreach(App\daerah::get() as $daerah)
+                                                <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
+                                                @endforeach
+                                        </select>
+                                </div>
+                          </div>       
+                        <?php }elseif ($st == 2 ) { ?>
+                           <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
+                                    <div class="col-md-6">
+                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value='<?php echo $i ;?>'>please klick<?php echo $st;?></option>
+                                                <option value='<?php echo $i ;?>'>please klick this tombol</option>
+                                        </select>
+                                    </div>
+                           </div>
+                        <?php }else { ?>
+                          <div class="d-lg-none">
+                            <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
+                                    <div class="col-md-6">
+                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value='<?php echo $i ;?>'>please klick<?php echo $st;?></option>
+                                                <option value='<?php echo $i ;?>'>please klick this tombol</option>
+                                        </select>
+                                    </div>
+                           </div>
+                          </div>
+                        <?php } ?>
+                        <?php if ($st == 3 ) {?>
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
+                                    <div class="col-md-6">
+                                        <select name="desas_id" id="desa" class="form-control"><option value='<?php echo $ds ;?>'>please klick<?php echo $st;?></option>
+                                                <option value='<?php echo $ds ;?>'>please klick this tombol</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        <?php }elseif ($st == 4 ) { ?>
+                              <div class="d-lg-none">
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
+                                    <div class="col-md-6">
+                                        <select name="desas_id" id="desa" class="form-control"><option value='<?php echo $ds ;?>'>please klick<?php echo $st;?></option>
+                                                <option value='<?php echo $ds ;?>'>please klick this tombol</option>
+                                        </select>
+                                    </div>
+                                </div>
+                              </div>
+                        <?php }else { ?>
+                                <div class="form-group row">
+                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
+                                        <div class="col-md-6">
+                                            <select name="desas_id" class="form-control" id="desa">
+                                            <option value=''>Pilih Desa</option>
+                                            </select>
+                                        </div>
+                                </div>
+                         <?php } ?> 
+                         <?php if ($st == 4 ) {?>
+                              <div class="d-lg-none">
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kelompok') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="kelompoks_id" class="form-control">
+                                                    <option value='<?php echo $kl ;?>'>Pilih kelompok</option>
+                                                </select>
+                                          </div>
+                                    </div>
+                              </div>
+                         <?php }else { ?>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kelompok') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="kelompoks_id" id="kelompok" class="form-control">
+                                                    <option value=''>Pilih kelompok</option>
+                                                </select>
+                                          </div>
+                                    </div>
+
+                         <?php } ?>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                          <div class="col-md-6"> 
+                                             <input type="text" name="name" class="form-control" placeholder="Name">
+                                          </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Addres') }}</label>
+                                          <div class="col-md-6"> 
+                                              <input type="text" class="form-control" name="addres">
+                                          </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                                          <div class="col-md-6"> 
+                                              <input type="text" class="form-control" name="phone">
+                                          </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Birthday') }}</label>
+                                          <div class="col-md-6"> 
+                                              <input class="date form-control"  type="date" id="datepicker" name="birthday"> 
+                                          </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
+                                          <div class="col-md-6"> 
+                                              <select name="status" class="form-control">
+                                                      <option value=''>Pilih status</option>
+                                                      <option value="Dewasa">Dewasa</option>
+                                                      <option value="Remaja">Remaja</option>
+                                                      <option value="Anak-Anak">Anak-Anak</option>      
+                                              </select>
+                                          </div>
+                                    </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>                                   
+                                </form>
+                       </div>
+                  </div>
             </div>
-            <div class="form-group">PILIH DESA
-                <select name="desas_id" id="desa">
-                    <option value=''>Pilih Desa</option>
-                </select>
-            </div>
-            <div class="form-group">Kelompok
-                <select name="kelompoks_id" id="kelompok">
-                    <option value=''>Pilih kelompok</option>
-                </select>
-            </div>
-        <div class="form-group">
-             <strong>Name:</strong>
-             <input type="text" name="name" class="form-control" placeholder="Name">
-        </div>
-        <!--  -->
-        <div class="form-group">
-              <label for="addres">Address:</label>
-              <input type="text" class="form-control" name="addres">
-        </div>
-        <div class="form-group">
-              <label for="phone">Phone Number:</label>
-              <input type="text" class="form-control" name="phone">
-        </div>
-        <div class="form-group">
-              <label for="birthday">birthday:</label>
-              <input class="date form-control"  type="date" id="datepicker" name="birthday"> 
-        </div>
-        <div class="form-group">PILIH STATUS
-              <select name="status">
-                      <option value=''>Pilih status</option>
-                      <option value="Dewasa">Dewasa</option>
-                      <option value="Remaja">Remaja</option>
-                      <option value="Anak-Anak">Anak-Anak</option>      
-              </select>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-    </div>
-   
-</form>
-@endsection
+        </div>         
 <script src="{{ asset('js/jquery.js')}}"></script>
 <script>        
    $(document).ready(function() {
@@ -122,3 +186,6 @@
         });
     }); 
 </script>
+@endauth
+@endif
+@endsection
