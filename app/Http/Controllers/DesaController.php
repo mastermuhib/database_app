@@ -17,12 +17,8 @@ class DesaController extends Controller
     public function index()
     {   
     ?>
-        @if (Route::has('login'))
-        @auth
     <?php $i = Auth::user()->daerahs_id ;?>
     <?php $u = Auth::user()->rules_id ;?>
-        @endauth
-        @endif
     <?php
         if ($u == 1){
                         $desas = DB::table('desas')

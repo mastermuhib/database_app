@@ -16,14 +16,11 @@ class DaerahController extends Controller
      */
     public function index()
     {
-        // $daerah = DB::table('daerah')->get();
         ?>
-        @if (Route::has('login'))
-        @auth
+        
     <?php $i = Auth::user()->daerahs_id ;?>
     <?php $u = Auth::user()->rules_id ;?>
-        @endauth
-        @endif
+        
     <?php
         if ($u == 1){
                         $daerah = DB::table('daerahs')

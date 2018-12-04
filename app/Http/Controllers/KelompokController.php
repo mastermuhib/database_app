@@ -16,13 +16,9 @@ class KelompokController extends Controller
     public function index()
     {
     ?>
-        @if (Route::has('login'))
-        @auth
     <?php $d = Auth::user()->daerahs_id ;?>
     <?php $i = Auth::user()->desas_id ;?>
     <?php $u = Auth::user()->rules_id ;?>
-        @endauth
-        @endif
     <?php
         if ($u == 1){
                       $kelompoks = DB::table('kelompoks')

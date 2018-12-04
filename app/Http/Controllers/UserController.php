@@ -17,6 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        
         $user = DB::table('users')
             ->select('id','name', 'email','rules_id')
             ->paginate(5);
