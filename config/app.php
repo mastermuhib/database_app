@@ -223,5 +223,14 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    'providers' => [
+    ...,
+    Yajra\DataTables\DataTablesServiceProvider::class,
+    ]
+
+    'aliases' => [
+        ...,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+    ]
 
 ];

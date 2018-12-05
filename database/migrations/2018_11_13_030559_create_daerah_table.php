@@ -28,6 +28,6 @@ class CreateDaerahTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daerah');
+        Schema::dropIfExists('daerahs');
     }
 }

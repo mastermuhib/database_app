@@ -29,6 +29,6 @@ class CreateTableDesa extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desa');
+        Schema::dropIfExists('desas');
     }
 }

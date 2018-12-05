@@ -21,16 +21,16 @@
     <table class="order-table table table-bordered">
         <tr>
             <th>NOMOR</th>
+             <th>Name Desa</th>
             <th>Name Daerah</th>
-            <th>Name Desa</th>
             <th width="280px">Action</th>
         </tr>
         <?php $no = 1; ?>
         @foreach ($desa as $product)
         <tr>
             <td>{{ $no }}</td>
-            <td>{{ $product->name1 }}</td>
             <td>{{ $product->name2 }}</td>
+            <td>{{ $product->name1 }}</td>
             <td>
                 <form action="{{ route('desa.destroy',$product->id) }}" method="POST">
    

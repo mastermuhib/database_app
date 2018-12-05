@@ -29,6 +29,6 @@ class CreateTableKelompok extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelompok');
+        Schema::dropIfExists('kelompoks');
     }
 }

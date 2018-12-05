@@ -17,6 +17,8 @@
         </div>
     @endif
 <script type="text/javascript" async="" src="{{asset('assets/js/search.js')}}"></script>   
+<script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.js')}}"></script>   
+<script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.css')}}"></script>   
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
     <table class="order-table table table-bordered">
         <tr>

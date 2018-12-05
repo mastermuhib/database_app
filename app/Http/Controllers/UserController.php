@@ -20,7 +20,7 @@ class UserController extends Controller
         
         $user = DB::table('users')
             ->select('id','name', 'email','rules_id')
-            ->paginate(5);
+            ->get();
 
         return view('users.index', ['user' => $user]);
     }

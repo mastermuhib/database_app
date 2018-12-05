@@ -41,6 +41,6 @@ Route::get ( '/cobi', function () {
     $data = User::all ();
     return view ( '/cobi.index' )->withData ( $data );
 } );
-Route::get ( '/cobi1', function () {
-    return view ( '/cobi.search' );
+Route::get ( '/datatable', function () {
+    return view ( '/coba.index' );
 } );
