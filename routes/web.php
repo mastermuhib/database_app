@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,3 +37,10 @@ Route::resource('users','UserController');
 Route::get('/users/create', function () {
     return view('/users.create');
 });
+Route::get ( '/cobi', function () {
+    $data = User::all ();
+    return view ( '/cobi.index' )->withData ( $data );
+} );
+Route::get ( '/cobi1', function () {
+    return view ( '/cobi.search' );
+} );

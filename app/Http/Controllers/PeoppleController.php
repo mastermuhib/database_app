@@ -27,14 +27,14 @@ class PeoppleController extends Controller
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
                         ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
-                        ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
                         ->paginate(7);
         }elseif ($u == 2){
                     $peopples = DB::table('peopples')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
                         ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
-                        ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
                         ->where('daerahs.id','=', $d)
                         ->paginate(7);
         }elseif ($u == 3){
@@ -42,7 +42,7 @@ class PeoppleController extends Controller
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
                         ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
-                        ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
                         ->where('desas.id','=', $ds)
                         ->paginate(7);
         } else {
@@ -50,7 +50,7 @@ class PeoppleController extends Controller
                     ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
                     ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
                     ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
-                    ->select('peopples.id as id','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
+                    ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2')
                     ->where('kelompoks.id','=', $i)
                     ->paginate(7);
         }

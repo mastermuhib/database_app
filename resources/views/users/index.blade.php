@@ -16,8 +16,14 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-   
-    <table class="table table-bordered">
+<script type="text/javascript" async="" src="{{asset('assets/js/search.js')}}"></script>
+<script type="text/javascript" async="" src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>   
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
+    <table class="order-table table table-bordered">
         <tr>
             <th>No</th>
             <th>name</th>
@@ -67,3 +73,8 @@
     {{ $user->links() }}
 </div>      
 @endsection
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>

@@ -16,8 +16,9 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-   
-    <table class="table table-bordered">
+<script type="text/javascript" async="" src="{{asset('assets/js/search.js')}}"></script>   
+    <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
+    <table class="order-table table table-bordered">
         <tr>
             <th>NOMOR</th>
             <th>Name Daerah</th>
