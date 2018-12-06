@@ -1,12 +1,12 @@
-@extends('layouts.apps') 
+@extends('layouts.apps')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Menambah user</h2>
+                <h2>Kelas</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ ('users/create') }}"> Buat user Baru</a>
+                <a class="btn btn-success" href="{{ ('kelas/create') }}"> Buat kelas Baru</a>
             </div>
         </div>
     </div>
@@ -17,42 +17,28 @@
         </div>
     @endif
 <script type="text/javascript" async="" src="{{asset('assets/js/search.js')}}"></script>   
+<script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.js')}}"></script>   
+<script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.css')}}"></script>   
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
     <table class="order-table table table-bordered">
         <tr>
-            <th>No</th>
-            <th>name</th>
-            <th>email</th>
-            <th>Hak Akses</th>
+            <th>NOMOR</th>
+            <th>Name kelas</th>
             <th width="280px">Action</th>
         </tr>
         <?php $no = 1; ?>
-        @foreach ($data as $product)
-        <?php if ($product->rules_id == 1) {
-            $akses = "super admin";
-              } elseif ($product->rules_id == 2) {
-            $akses = "admin daerah";
-              } elseif ($product->rules_id == 3) {
-            $akses = "admin desa";
-              } elseif ($product->rules_id == 4) {
-            $akses = "admin kelompok";
-              } else {
-            $akses = "anggota baru";   
-              }
-        ?>
+        @foreach ($kelas as $product)
         <tr>
             <td>{{ $no }}</td>
             <td>{{ $product->name }}</td>
-            <td>{{ $product->email}}</td>
-            <td>{{ $akses}}</td>
             <td>
-                <form action="" method="POST">
+                <form action="{{ route('kelas.destroy',$product->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="">Show</a>
+                    <a class="btn btn-info" href="{{ route('kelas.show',$product->id) }}">Show</a>
 
  
     
-                    <a class="btn btn-primary" href="">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('kelas.edit',$product->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')
@@ -64,6 +50,7 @@
         <?php $no++; ?>
         @endforeach
     </table>
-<div style="padding-top: 50px;">
-</div>      
+<div style="padding-top: 10px;">
+    {{ $kelas->links() }}
+</div>
 @endsection

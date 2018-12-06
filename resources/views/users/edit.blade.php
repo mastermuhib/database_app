@@ -39,7 +39,7 @@
                             <label for="daerah" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="daerahs_id" id="daerah">
-                                      <option value=''>Pilih Daerah</option>
+                                      <option value='value="{{ $user->daerahs_id }}"'>Pilih daerah</option>
                                             @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach
@@ -50,7 +50,7 @@
                             <label for="desa" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="desas_id" id="desa">
-                                      <option value=''>Pilih desa</option>
+                                      <option value='{{ $user->desas_id }}'>Pilih desa</option>
                                             <!-- @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach -->
@@ -61,7 +61,7 @@
                             <label for="kelompok" class="col-md-4 col-form-label text-md-right">{{ __('KELOMPOK') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="kelompoks_id" id="kelompok">
-                                      <option value=''>Pilih Kelompok</option>
+                                      <option value='{{ $user->kelompoks_id }}'>Pilih Kelompok</option>
                                             <!-- @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach -->

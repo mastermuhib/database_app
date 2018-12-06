@@ -12,10 +12,12 @@ class Peopple extends Model
         'daerahs_id',
         'desas_id',
         'kelompoks_id',
+        'kelas_id',
         'name',
         'addres', 
         'phone',
         'birthday',
+        'posisi',
         'status'
     ];
 }

@@ -84,6 +84,7 @@
         </tfoot>
     </table> 
 <div style="padding-top: 50px;">
+    {{ $user->links() }}
 </div> 
 @endsection
 @section('script')

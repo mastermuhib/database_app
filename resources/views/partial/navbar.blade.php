@@ -105,6 +105,12 @@
               <span class="menu-title">PEOPLE</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('kelas')}}">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">KELAS</span>
+            </a>
+          </li>
         <?php } else { ?> 
         <?php } ?>
           <li class="nav-item">

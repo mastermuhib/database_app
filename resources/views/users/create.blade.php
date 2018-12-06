@@ -1,5 +1,8 @@
 @extends('layouts.apps') 
 @section('content')
+@if (Route::has('login'))
+@auth
+<?php $st = Auth::user()->rules_id ; ?>
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -119,6 +122,8 @@
         </div>
     </div>
 </div>
+@endauth
+@endif
 @endsection
 <script src="{{ asset('js/jquery.js')}}"></script>
 <script>        

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class UserController extends Controller
 {
@@ -17,10 +18,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        ?>
+            <?php $d = Auth::user()->daerahs_id ;?>
+            <?php $ds = Auth::user()->desas_id ;?>
+            <?php $i = Auth::user()->kelompoks_id ;?>
+            <?php $u = Auth::user()->rules_id ;?>
+        <?php
         $user = DB::table('users')
             ->select('id','name', 'email','rules_id')
-            ->get();
+            ->paginate(7);
 
         return view('users.index', ['user' => $user]);
     }

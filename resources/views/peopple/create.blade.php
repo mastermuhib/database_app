@@ -133,6 +133,17 @@
                                               </select>
                                           </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="posisi" class="col-md-4 col-form-label text-md-right">{{ __('Posisi') }}</label>
+                                          <div class="col-md-6"> 
+                                              <select name="posisi" class="form-control">
+                                                      <option value=''>Pilih Posisi</option>
+                                                      <option value="1">guru</option>
+                                                      <option value="2">murid</option>
+                                                      <option value="3">Netral</option>      
+                                              </select>
+                                          </div>
+                                    </div>
                                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>

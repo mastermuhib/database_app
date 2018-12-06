@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Menambah peopple</h2>
+                <h2>People In Class</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ ('peopple/create') }}"> Buat peopple Baru</a>
+                <a class="btn btn-success" href="/kelas"> Back</a>
             </div>
         </div>
     </div>
@@ -29,19 +29,10 @@
             <th>Name Desa</th>
             <th>Name Kelompok</th>
             <th>Kelas</th>
-            <th>Posisi</th>
             <th>Action</th>
         </tr>
         <?php $no = 1; ?>
-        @foreach ($peopple as $product)
-        <?php if ($product->posisi == 1) {
-            $posisi = "GURU";
-              } elseif ($product->posisi == 2) {
-            $posisi = "MURID";
-              } else {
-           $posisi = "Netral";   
-              }
-        ?>
+        @foreach ($peopples as $product)
         <tr>
             <td>{{ $no }}</td>
             <td>{{ $product->name4 }}</td>
@@ -50,7 +41,6 @@
             <td>{{ $product->name2 }}</td>
             <td>{{ $product->name3 }}</td>
             <td>{{ $product->name5 }}</td>
-            <td>{{ $posisi }}</td>
             <td>
                 <form action="{{ route('peopple.destroy',$product->id) }}" method="POST">
                     <div class="input-group-btn">
@@ -74,6 +64,6 @@
         @endforeach
     </table>
 <div style="padding-top: 10px;">
-    {{ $peopple->links() }}
+    {{ $peopples->links() }}
 </div>
 @endsection
