@@ -22,6 +22,8 @@ class User extends Authenticatable
         'desas_id',
         'kelompoks_id',
         'rules_id',
+        'kelas_id',
+        'people_id',
     ];
 
     /**

@@ -4,7 +4,6 @@
 @auth
 <?php $r = Auth::user()->rules_id ; ?>
 <?php $i = Auth::user()->kelompoks_id ; ?>
-@if ($r >=  1 && $r <=  4 )
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -27,22 +26,61 @@
         </div>
     @endif
   
-    <form action="{{ route('peopple.update',$peopple['id']) }}" method="POST">
+     <form method="POST" action="{{ route('users.store') }}">
         @csrf
-        @method('PUT')
-
+        <div class="form-group row">
+                            <label for="daerah" class="col-md-4 col-form-label text-md-right">{{ __('ID') }}</label>
+                              <div class="col-md-6">
+                                 <input type="text" id="people_id" name="people_id" value="{{ $peopple->id }}" class="form-control" placeholder="Name" readonly="true">
+                              </div>
+        </div>
         <div class="form-group row">
                             <label for="daerah" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                               <div class="col-md-6">
-                                 <input type="text" name="name" value="{{ $peopple->name }}" class="form-control" placeholder="Name">
+                                 <input type="text" id="name" name="name" value="{{ $peopple->name }}" class="form-control" placeholder="Name" readonly="true">
                               </div>
         </div>
-    <?php if ($r == 1) { ?>
         <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+        </div>
+
+        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+        </div>
+
+        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+        </div>
+    <?php if ($r == 1) { ?>
+        <div class="form-group row d-none">
                             <label for="daerah" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="daerahs_id" id="daerah">
-                                      <option value='{{ $peopple->daerahs_id }}'>Pilih Daerah</option>
+                                      <option value='{{ $peopple->daerahs_id }}'>{{ $peopple->daerahs_id }}</option>
                                             @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach
@@ -54,7 +92,7 @@
                             <label for="daerah" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="daerahs_id" id="daerah">
-                                      <option value='{{ $peopple->daerahs_id }}'>Pilih Daerah</option>
+                                      <option value='{{ $peopple->daerahs_id }}'>{{ $peopple->daerahs_id }}</option>
                                             @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach
@@ -63,11 +101,11 @@
         </div>
     <?php } ?>
     <?php if ($r == 1) { ?>
-        <div class="form-group row">
+        <div class="form-group row d-none">
                             <label for="desa" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="desas_id" id="desa">
-                                      <option value='{{ $peopple->desas_id }}'>Pilih desa</option>
+                                      <option value='{{ $peopple->desas_id }}'>{{ $peopple->desas_id }}</option>
                                             <!-- @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach -->
@@ -79,7 +117,7 @@
                             <label for="desa" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="desas_id" id="desa">
-                                      <option value='{{ $peopple->desas_id }}'>Pilih desa</option>
+                                      <option value='{{ $peopple->desas_id }}'>{{ $peopple->desas_id }}</option>
                                             <!-- @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach -->
@@ -88,11 +126,11 @@
         </div>
     <?php } ?>
     <?php if ($r == 1) { ?>
-         <div class="form-group row">
+         <div class="form-group row d-none">
                             <label for="kelompok" class="col-md-4 col-form-label text-md-right">{{ __('KELOMPOK') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="kelompoks_id" id="kelompok">
-                                      <option value='{{ $peopple->kelompoks_id }}'>Pilih Kelompok</option>
+                                      <option value='{{ $peopple->kelompoks_id }}'>{{ $peopple->kelompoks_id }}</option>
                                             <!-- @foreach(App\daerah::get() as $daerah)
                                             <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                             @endforeach -->
@@ -113,37 +151,13 @@
         </div>
     <?php } ?>
         <div class="form-group row">
-                            <label for="Addres" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
-                              <div class="col-md-6">
-                                 <input type="text" name="addres" value="{{ $peopple->addres }}" class="form-control" placeholder="addres">
-                              </div>
-        </div>
-        <div class="form-group row">
-                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
-                              <div class="col-md-6">
-                                 <input type="text" name="status" value="{{ $peopple->status }}" class="form-control" placeholder="status">
-                              </div>
-        </div>
-        <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
-                              <div class="col-md-6">
-                                 <input type="text" name="phone" value="{{ $peopple->phone }}" class="form-control" placeholder="phone">
-                              </div>
-        </div>
-        <div class="form-group row">
-                            <label for="birthday" class="col-md-4 col-form-label text-md-right">{{ __('Birthday') }}</label>
-                              <div class="col-md-6">
-                                <input type="date" name="birthday" value="{{ $peopple->birthday }}" class="form-control" placeholder="birthday">
-                              </div>
-        </div>
-        <div class="form-group row">
                             <label for="hak akses" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
                               <div class="col-md-6">
-                                <select class="form-control" name="posisi" id="posisi">
+                                <select class="form-control" name="rules_id" id="rules_id">
                                       <option value='{{ $peopple->posisi }}'>Pilih Posisi</option>
-                                      <option value='1'>Guru</option>
-                                      <option value='2'>Murid</option>
-                                      <option value='3'>Netral</option>
+                                      <option value='5'>Guru</option>
+                                      <option value='6'>Murid</option>
+                                      <option value='7'>Netral</option>
                                 </select>
                               </div>
         </div>
@@ -151,7 +165,7 @@
                             <label for="hak akses" class="col-md-4 col-form-label text-md-right">{{ __('Kelas') }}</label>
                               <div class="col-md-6">
                                 <select class="form-control" name="kelas_id" id="kelas">
-                                      <option value='{{ $peopple->kelas_id }}'>Pilih Kelas</option>
+                                      <option value='{{ $peopple->kelas_id }}'>{{ $peopple->kelas_id }}</option>
                                       @foreach(App\kelas::get() as $kelas)
                                       <option value='{{ $kelas->id }}'>{{ $kelas->name }}</option>
                                       @endforeach
@@ -163,31 +177,7 @@
         </div>
    
     </form>
-@else
-<div class="card" style="margin-top: 100px;">
-                <div class="card-header">I'M  Sorry</div>
 
-                <div class="card-body">
-                        <div class="alert alert-succes" role="alert">
-                           <h1> ACCES DENIED </h1>
-                        </div>
-                    You are not acces in here!!
-                    <h3>Mohon Maaf Anda tidak dapat mengakses halaman ini</h3>
-                </div>
-</div>
-@endif
-@else
-<div class="card"  style="margin-top: 100px;">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                        <div class="alert alert-succes" role="alert">
-                           <h1> ACCES DENIED </h1>
-                        </div>
-                    You are not access in here!!
-                    <h3>Please  <a  href="{{ route('login') }}">Login </a> or <a href="{{ route('login') }}">Register</a></h3>
-                </div>
-</div>
 @endauth
 @endif 
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\daerah;
+use Illuminate\Support\Facades\Route;
 use Auth;
 
 class DaerahController extends Controller
@@ -16,10 +17,10 @@ class DaerahController extends Controller
      */
     public function index()
     {
-        ?>
-        
-    <?php $i = Auth::user()->daerahs_id ;?>
-    <?php $u = Auth::user()->rules_id ;?>
+    ?>
+    <?php if (Auth::check()) { ?>
+        <?php $i = Auth::user()->daerahs_id ;?>
+        <?php $u = Auth::user()->rules_id ;?>
         
     <?php
         if ($u == 1){
@@ -32,7 +33,10 @@ class DaerahController extends Controller
                         ->where('id','=', $i)
                         ->get();
         }
-        return view('daerah.index', ['daerah' => $daerah]);
+        return view('daerah.index', ['daerah' => $daerah]); ?>
+    <?php } else {
+        return redirect('home');
+    }
     }
 
     /**

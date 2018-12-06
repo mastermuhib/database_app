@@ -4,6 +4,7 @@
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
 <?php $i = Auth::user()->daerahs_id ; ?>
+@if ($st ==  1 or $st ==  2 )
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,6 +63,31 @@
             </div>
         </div>
     </div>
+</div>
+@else
+<div class="card" style="margin-top: 100px;">
+                <div class="card-header">I'M  Sorry</div>
+
+                <div class="card-body">
+                        <div class="alert alert-succes" role="alert">
+                           <h1> ACCES DENIED </h1>
+                        </div>
+                    You are not super admin!!
+                    <h3>Hanya Super Admin Yang dapat mengakses halaman ini</h3>
+                </div>
+</div>
+@endif
+@else
+<div class="card"  style="margin-top: 100px;">
+                <div class="card-header">Dashboard</div>
+
+                <div class="card-body">
+                        <div class="alert alert-succes" role="alert">
+                           <h1> ACCES DENIED </h1>
+                        </div>
+                    You are not access in here!!
+                    <h3>Please  <a  href="{{ route('login') }}">Login </a> or <a href="{{ route('login') }}">Register</a></h3>
+                </div>
 </div>
 @endauth
 @endif

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Peopple;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +47,7 @@ class PeoppleController extends Controller
                         ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','peopples.posisi as posisi')
                         ->where('desas.id','=', $ds)
                         ->paginate(7);
-        } else {
+        } elseif ($u == 4) {
                     $peopples = DB::table('peopples')
                     ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
                     ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
@@ -113,6 +112,32 @@ class PeoppleController extends Controller
      * @param  \App\Peopple  $peopple
      * @return \Illuminate\Http\Response
      */
+    public function storeguru(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+        $user= new \App\User;
+        $user->name=$request->get('name');
+        $user->email=$request->get('email');
+        $user->rules_id=$request->get('rules_id');
+        $user->password=Hash::make($request->get('password'));
+        $user->daerahs_id=$request->get('daerahs_id');
+        $user->desas_id=$request->get('desas_id');
+        $user->kelompoks_id=$request->get('kelompoks_id');
+        $user->save();   
+        return redirect()->route('users.index')
+                        ->with('success','users created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $peopple = \App\Peopple::find($id);
@@ -129,6 +154,19 @@ class PeoppleController extends Controller
     {
         $peopple = \App\Peopple::find($id);
         return view('peopple.edit',compact('peopple','id'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Peopple  $peopple
+     * @return \Illuminate\Http\Response
+     */
+    public function addguru($id)
+    {
+        $peopple = \App\Peopple::find($id);
+        return view('peopple.addguru',compact('peopple','id'));
     }
 
     /**

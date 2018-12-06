@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
@@ -19,16 +20,21 @@ class UserController extends Controller
     public function index()
     {
         ?>
+        <?php if (Auth::check()) { ?>
             <?php $d = Auth::user()->daerahs_id ;?>
             <?php $ds = Auth::user()->desas_id ;?>
             <?php $i = Auth::user()->kelompoks_id ;?>
             <?php $u = Auth::user()->rules_id ;?>
-        <?php
+        <?php 
         $user = DB::table('users')
             ->select('id','name', 'email','rules_id')
             ->paginate(7);
 
         return view('users.index', ['user' => $user]);
+        ?>
+        <?php } else {
+        return redirect('home');
+    }
     }
 
     /**
@@ -63,6 +69,8 @@ class UserController extends Controller
         $user->daerahs_id=$request->get('daerahs_id');
         $user->desas_id=$request->get('desas_id');
         $user->kelompoks_id=$request->get('kelompoks_id');
+        $user->kelas_id=$request->get('kelas_id');
+        $user->people_id=$request->get('people_id');
         $user->save();   
         return redirect()->route('users.index')
                         ->with('success','users created successfully.');

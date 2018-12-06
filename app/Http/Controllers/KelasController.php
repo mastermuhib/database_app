@@ -16,6 +16,7 @@ class KelasController extends Controller
     public function index()
     {
     ?>
+    <?php if (Auth::check()) { ?>
             <?php $i = Auth::user()->kelompoks_id ;?>
             <?php $u = Auth::user()->rules_id ;?>
     <?php
@@ -33,7 +34,10 @@ class KelasController extends Controller
                     ->paginate(7);
         }
 
-        return view('kelas.index', ['kelas' => $kelas]);  
+        return view('kelas.index', ['kelas' => $kelas]);?>
+    <?php } else {
+        return redirect('home');
+    }  
     }
 
     /**

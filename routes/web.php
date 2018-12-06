@@ -20,7 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/getdesa/{id}', 'KelompokController@getdesa');
 Route::get('/getkelompok/{id}', 'PeoppleController@getkelompok');
-Route::get('/peopple/{id}', 'PeoppleController@index');
 Route::resource('daerah','DaerahController');
 Route::get('/daerah/create', function () {
     return view('/daerah.create');
@@ -30,18 +29,18 @@ Route::get('/desa/create', function () {
     return view('/desa.create');
 });
 Route::resource('kelompok','KelompokController');
-Route::resource('peopple','PeoppleController');
-Route::get('/peopple/create', function () {
-    return view('/peopple.create');
+Route::resource('peopple','PeoppleController')->only(['index','create','show', 'store', 'edit', 'update', 'destroy','addguru']);
+Route::get('/people/created', function () {
+    return view('create');
 });
+Route::get('/peopple/addguru/{id}', 'PeoppleController@addguru');
 Route::resource('users','UserController');
 Route::get('/users/create', function () {
     return view('/users.create');
 });
-Route::get ( '/cobi', function () {
-    $data = User::all ();
-    return view ( '/cobi.index' )->withData ( $data );
-} );
+// Route::get ( '/peopple/{id}/addguru', function () {
+//     return view ( '/peopple.addguru' );
+// } );
 Route::get ( '/datatable', function () {
     return view ( '/coba.index' );
 } );

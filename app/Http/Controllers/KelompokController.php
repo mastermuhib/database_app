@@ -16,6 +16,7 @@ class KelompokController extends Controller
     public function index()
     {
     ?>
+    <?php if (Auth::check()) { ?>
     <?php $d = Auth::user()->daerahs_id ;?>
     <?php $i = Auth::user()->desas_id ;?>
     <?php $u = Auth::user()->rules_id ;?>
@@ -42,7 +43,10 @@ class KelompokController extends Controller
                         ->paginate(7);
         }
 
-        return view('kelompok.index', ['kelompok' => $kelompoks]);
+        return view('kelompok.index', ['kelompok' => $kelompoks]);?>
+    <?php } else {
+        return redirect('home');
+    }  
     }
 
     /**

@@ -17,8 +17,9 @@ class DesaController extends Controller
     public function index()
     {   
     ?>
-    <?php $i = Auth::user()->daerahs_id ;?>
-    <?php $u = Auth::user()->rules_id ;?>
+    <?php if (Auth::check()) { ?>
+        <?php $i = Auth::user()->daerahs_id ;?>
+        <?php $u = Auth::user()->rules_id ;?>
     <?php
         if ($u == 1){
                         $desas = DB::table('desas')
@@ -32,7 +33,10 @@ class DesaController extends Controller
             ->where('daerahs.id','=', $i)
             ->paginate(7);
         }
-        return view('desa.index', ['desa' => $desas]);
+        return view('desa.index', ['desa' => $desas]);?>
+    <?php } else {
+        return redirect('home');
+    }
     }
     /**
      * Show the form for creating a new resource.
