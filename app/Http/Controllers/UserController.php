@@ -56,6 +56,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+    if (Auth::check()) {
+    $u = Auth::user()->rules_id ;
         $request->validate([
             'name' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -71,9 +73,17 @@ class UserController extends Controller
         $user->kelompoks_id=$request->get('kelompoks_id');
         $user->kelas_id=$request->get('kelas_id');
         $user->people_id=$request->get('people_id');
-        $user->save();   
+        $user->save(); 
+        if ($u == 1) {
         return redirect()->route('users.index')
                         ->with('success','users created successfully.');
+        }else {
+        return redirect()->route('peopple.index')
+                        ->with('success','Add Guru successfully.');
+        }
+    } else {
+        return redirect('home');
+    }
     }
 
     /**
