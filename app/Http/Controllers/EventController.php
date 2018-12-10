@@ -101,16 +101,18 @@ class EventController extends Controller
      */
     public function show($id)
     {
-                 if (Auth::check()) {
-                 $u = Auth::user()->rules_id ;
-                 $kelas = Auth::user()->kelas_id ;
+     if (Auth::check()) {
+     $u = Auth::user()->rules_id ;
+     $kelas = Auth::user()->kelas_id ;
        $peopples = DB::table('peopples')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
                         ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
                         ->leftJoin('kelas', 'kelas.id', '=', 'peopples.kelas_id')
-                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5')
+                        ->leftJoin('absensi', 'absensi.peopple_id', '=', 'peopples.id')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','absensi.peopple_id as peopple_abs','absensi.event_id as event')->distinct()
                         ->where('kelas.id','=', $kelas)
+                        ->where('peopples.posisi','=', 2)
                         ->paginate(7);
         return view('event.show', ['peopples' => $peopples]);
     }
@@ -136,7 +138,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {          
         $request->validate([
             'name' => 'required',
         ]);

@@ -44,13 +44,11 @@
                       <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
                         <span class="fa fa-caret-down"></span></button>
                       <ul class="dropdown-menu">
-                        <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Show</a></li>
+                        <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Absensi</a></li>
                         <li><a class="btn btn-primary form-control" href="{{ route('event.edit',$product->id) }}">Atur Posisi</a></li>
                     @csrf
                     @method('DELETE')
                         <li><button type="submit" class="btn btn-danger form-control">Delete</button></li>
-                        <li class="divider"></li>
-                        <li><a class="btn btn-warning form-control" href="{{ route('peopple.addguru',$product->id) }}">Absensi</a></li>
                       </ul>
                     </div>
                   </div>

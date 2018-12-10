@@ -27,7 +27,11 @@
             <td>{{ $product->alamat }}</td>
             <td>{{ $product->name5 }}</td>
             <td>
-            <input type="checkbox" name="peopple_id[]" value="{{ $product->id }}" ><input type="hidden" name="event_id" value="{{ Request::segment(2) }}">
+             <?php if ( $product->peopple_abs >= 1 and $product->event == Request::segment(2) ) { ?>
+            <input type="checkbox" id="uncek" name="peopple_id[]" value="{{ $product->id }}" checked="true" ><input type="hidden" name="event_id" value="{{ Request::segment(2) }}">
+        <?php } else { ?>
+            <input type="checkbox" name="peopple_id[]" value="{{ $product->id }}"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}">
+        <?php } ?>
             </td>
         </tr>
         <?php $no++; ?>
@@ -69,3 +73,14 @@
 @endauth
 @endif 
 @endsection
+<script type="text/javascript" async="" src="{{asset('assets/js/jquery3.js')}}"></script>   
+<script>
+$(document).ready(function(){
+    
+    $("#uncek").click(function () {
+        
+    console.log("berhasil")     
+    }); 
+        
+  });    
+</script>

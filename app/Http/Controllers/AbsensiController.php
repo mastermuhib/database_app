@@ -35,15 +35,15 @@ class AbsensiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        DB::table('absensi')->truncate();
         $idsiswa = $request->peopple_id;
 
-         foreach ($idsiswa as $ids) {
-
-        $student= new \App\absensi; // assume you use this model
-        $student->peopple_id = $ids;
-        $student->event_id=$request->get('event_id');
-        $student->save();
+        foreach ($idsiswa as $ids) {
+            $student= new \App\absensi; // assume you use this model
+            $student->peopple_id = $ids;
+            $student->event_id=$request->get('event_id');
+            $student->save();
     }
 return redirect()->route('event.index')
                         ->with('success','Absensi successfully.');
@@ -91,6 +91,10 @@ return redirect()->route('event.index')
      */
     public function destroy($id)
     {
-        //
+        $absensi = \App\absensi::find($id);
+        $absensi->delete();
+  
+        return redirect()->route('event.index')
+                        ->with('success','kelast deleted successfully');
     }
 }
