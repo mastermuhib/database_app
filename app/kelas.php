@@ -10,6 +10,8 @@ class kelas extends Model
     Protected $fillable = [
         'id',
         'kelompoks_id', 
+        'daerahs_id', 
+        'desas_id', 
         'name'
     ];
 }

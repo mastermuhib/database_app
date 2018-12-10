@@ -4,7 +4,7 @@
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
 <?php $i = Auth::user()->kelompoks_id ; ?>
-@if ($st ==  2 )
+@if ($st ==  4 )
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">

@@ -101,8 +101,19 @@ class EventController extends Controller
      */
     public function show($id)
     {
-       $event = \App\event::find($id);
-        return view('event.show',compact('event','id'));
+                 if (Auth::check()) {
+                 $u = Auth::user()->rules_id ;
+                 $kelas = Auth::user()->kelas_id ;
+       $peopples = DB::table('peopples')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                        ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                        ->leftJoin('kelas', 'kelas.id', '=', 'peopples.kelas_id')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5')
+                        ->where('kelas.id','=', $kelas)
+                        ->paginate(7);
+        return view('event.show', ['peopples' => $peopples]);
+    }
     }
 
     /**

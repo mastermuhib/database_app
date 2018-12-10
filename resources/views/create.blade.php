@@ -1,5 +1,6 @@
 @extends('layouts.apps') 
 @section('content')
+<?php use Illuminate\Support\Facades\DB; ?>
 @if (Route::has('login'))
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
@@ -105,9 +106,24 @@
                                           </div>
                                     </div>
                          <?php } ?>
-                         <?php if ($st == 5 ) { ?>
-                                       <input type="hidden" name="kelas_id" class="form-control" value="<?php echo $kelas ;?>" placeholder="Name">
-                          <?php } ?>  
+                         <?php if ($st == 4 ) {?>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kelas') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="kelas_id" class="form-control">
+                                                    <option value=''>Pilih kelas</option>
+                                                      <?php $kelas = DB::table('kelas')->where('kelompoks_id','=', $kl)->get(); ?>
+                                                          @foreach($kelas as $product)
+                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                          @endforeach
+                                                </select>
+                                          </div>
+                                    </div>
+                         <?php } elseif ($st == 5 ) {?>
+                                       <input type="text" name="kelas_id" class="form-control" value="<?php echo $kelas ;?>" placeholder="Name">
+                         <?php }else { ?>
+
+                         <?php } ?>  
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                                           <div class="col-md-6"> 

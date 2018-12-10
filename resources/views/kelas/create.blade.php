@@ -4,6 +4,8 @@
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
 <?php $i = Auth::user()->kelompoks_id ; ?>
+<?php $daerah = Auth::user()->daerahs_id ; ?>
+<?php $desa = Auth::user()->desas_id ; ?>
 @if ($st ==  4 )
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
@@ -20,12 +22,14 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-                                <input id="kelompoks_id" type="text" name="kelompoks_id" value="<?php echo $i ;?>" >
+                                <input id="kelompoks_id" type="hidden" name="kelompoks_id" value="<?php echo $i ;?>" >
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+                                <input id="daerahs_id" type="hidden" name="daerahs_id" value="<?php echo $daerah ;?>" >
+                                <input id="desas_id" type="hidden" name="desas_id" value="<?php echo $desa ;?>" >
                             </div>
                         </div>
                         <div class="form-group row mb-0">

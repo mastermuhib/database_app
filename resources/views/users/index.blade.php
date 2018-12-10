@@ -26,8 +26,9 @@
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.min.js')}}"></script>   
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.min.css')}}"></script> 
 <link rel="stylesheet" href="{{asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}"> 
-
-    <table class="table table-bordered" id="table_id">
+ <script type="text/javascript" async="" src="{{asset('assets/js/search.js')}}"></script>   
+    <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
+    <table class="order-table table table-bordered"s>
         <thead>
         <tr>
             <th>No</th>
@@ -48,6 +49,8 @@
             $akses = "admin desa";
               } elseif ($product->rules_id == 4) {
             $akses = "admin kelompok";
+        } elseif ($product->rules_id == 5) {
+            $akses = "guru";
               } else {
             $akses = "anggota baru";   
               }

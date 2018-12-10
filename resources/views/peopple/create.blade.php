@@ -6,6 +6,7 @@
 <?php $i = Auth::user()->daerahs_id ; ?>
 <?php $ds = Auth::user()->desas_id ; ?>
 <?php $kl = Auth::user()->kelompoks_id ; ?>
+<?php $kls = Auth::user()->kelas_id ; ?>
 @if ($st >=  1 && $st <=  7 )
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
@@ -97,6 +98,26 @@
                                                 </select>
                                           </div>
                                     </div>
+
+                         <?php } ?>
+                         <?php if ($st == 4 ) {?>
+                              <div class="d-lg-none">
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kelas') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="kelas_id" class="form-control">
+                                                    <option value=''>Pilih kelas</option>
+                                                      <?php $kelass = DB::table('kelas')->whereIn('kelompoks_id', $kl)->get(); ?>
+                                                          @foreach($kelas as $product)
+                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                          @endforeach
+                                                </select>
+                                          </div>
+                                    </div>
+                              </div>
+                         <?php } elseif ($st == 5 ) {?>
+                                       <input type="text" name="kelas_id" class="form-control" value="$kls" placeholder="Name">
+                         <?php }else { ?>
 
                          <?php } ?>
                                     <div class="form-group row">

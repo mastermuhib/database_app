@@ -59,6 +59,22 @@
             <td>{{ $product->name5 }}</td>
             <td>{{ $posisi }}</td>
             <td>
+                <?php if ( $st == 5 ) { ?>
+                <form action="{{ route('peopple.destroy',$product->id) }}" method="POST">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
+                        <span class="fa fa-caret-down"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a class="btn btn-info form-control" href="{{ route('peopple.show',$product->id) }}">Show</a></li>
+                        <li><a class="btn btn-success form-control" href="{{ route('peopple.show',$product->id) }}">Absensi</a></li>
+                    @csrf
+                    @method('DELETE')
+                        <li><button type="submit" class="btn btn-danger form-control">Delete</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </form>
+                <?php } else { ?>
                 <form action="{{ route('peopple.destroy',$product->id) }}" method="POST">
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
@@ -79,6 +95,7 @@
                     </div>
                   </div>
                 </form>
+            <?php } ?>
             </td>
         </tr>
         <?php $no++; ?>

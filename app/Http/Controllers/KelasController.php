@@ -64,6 +64,8 @@ class KelasController extends Controller
         $kelas= new \App\kelas;
         $kelas->name=$request->get('name');
         $kelas->kelompoks_id=$request->get('kelompoks_id');
+        $kelas->daerahs_id=$request->get('daerahs_id');
+        $kelas->desas_id=$request->get('desas_id');
         $kelas->save();
    
         return redirect()->route('kelas.index')
