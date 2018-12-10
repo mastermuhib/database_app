@@ -6,7 +6,8 @@
 <?php $i = Auth::user()->daerahs_id ; ?>
 <?php $ds = Auth::user()->desas_id ; ?>
 <?php $kl = Auth::user()->kelompoks_id ; ?>
-@if ($st >=  1 && $st <=  4 )
+<?php $kelas = Auth::user()->kelas_id ; ?>
+@if ($st >=  1 && $st <=  7)
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -35,6 +36,8 @@
                                         </select>
                                     </div>
                            </div>
+                        <?php }elseif ($st == 5 ) { ?>
+                                       <input type="hidden" name="daerahs_id" class="form-control" value="<?php echo $i ;?>" placeholder="Name">
                         <?php }else { ?>
                           <div class="d-lg-none">
                             <div class="form-group row">
@@ -67,6 +70,8 @@
                                     </div>
                                 </div>
                               </div>
+                        <?php }elseif ($st == 5 ) { ?>
+                                       <input type="hidden" name="desas_id" class="form-control" value="<?php echo $ds ;?>" placeholder="Name">
                         <?php }else { ?>
                                 <div class="form-group row">
                                      <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
@@ -88,6 +93,8 @@
                                           </div>
                                     </div>
                               </div>
+                         <?php }elseif ($st == 5 ) { ?>
+                                       <input type="hidden" name="kelompoks_id" class="form-control" value="<?php echo $kl ;?>" placeholder="Name">
                          <?php }else { ?>
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kelompok') }}</label>
@@ -97,8 +104,10 @@
                                                 </select>
                                           </div>
                                     </div>
-
                          <?php } ?>
+                         <?php if ($st == 5 ) { ?>
+                                       <input type="hidden" name="kelas_id" class="form-control" value="<?php echo $kelas ;?>" placeholder="Name">
+                          <?php } ?>  
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                                           <div class="col-md-6"> 

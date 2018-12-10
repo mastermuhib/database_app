@@ -6,7 +6,7 @@
 <?php $i = Auth::user()->daerahs_id ; ?>
 <?php $ds = Auth::user()->desas_id ; ?>
 <?php $kl = Auth::user()->kelompoks_id ; ?>
-@if ($st >=  1 && $st <=  4 )
+@if ($st >=  1 && $st <=  7 )
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -65,12 +65,16 @@
                         <span class="fa fa-caret-down"></span></button>
                       <ul class="dropdown-menu">
                         <li><a class="btn btn-info form-control" href="{{ route('peopple.show',$product->id) }}">Show</a></li>
-                        <li><a class="btn btn-primary form-control" href="{{ route('peopple.edit',$product->id) }}">Edit</a></li>
+                        <li><a class="btn btn-primary form-control" href="{{ route('peopple.edit',$product->id) }}">Atur Posisi</a></li>
                     @csrf
                     @method('DELETE')
                         <li><button type="submit" class="btn btn-danger form-control">Delete</button></li>
                         <li class="divider"></li>
+                    <?php if ($product->posisi == NULL or $product->kelas == NULL) { ?>
+                        <li class="d-none"><a class="btn btn-warning form-control" href="{{ route('peopple.addguru',$product->id) }}">Add GURU</a></li>
+                    <?php } else { ?>
                         <li><a class="btn btn-warning form-control" href="{{ route('peopple.addguru',$product->id) }}">Add GURU</a></li>
+                    <?php } ?>
                       </ul>
                     </div>
                   </div>

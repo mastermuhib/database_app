@@ -4,14 +4,14 @@
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
 <?php $i = Auth::user()->kelompoks_id ; ?>
-@if ($st ==  4 )
+@if ($st >=  1 && $st <=  8 )
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Kelas</h2>
+                <h2>event</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ ('kelas/create') }}"> Buat kelas Baru</a>
+                <a class="btn btn-success" href="{{ ('event/create') }}"> Buat event Baru</a>
             </div>
         </div>
     </div>
@@ -28,27 +28,32 @@
     <table class="order-table table table-bordered">
         <tr>
             <th>NOMOR</th>
-            <th>Name kelas</th>
+            <th>Name event</th>
+            <th>dibuat Tanggal</th>
             <th width="280px">Action</th>
         </tr>
         <?php $no = 1; ?>
-        @foreach ($kelas as $product)
+        @foreach ($event as $product)
         <tr>
             <td>{{ $no }}</td>
             <td>{{ $product->name }}</td>
+            <td>{{ $product->date }}</td>
             <td>
-                <form action="{{ route('kelas.destroy',$product->id) }}" method="POST">
-   
-                    <a class="btn btn-info" href="{{ route('kelas.show',$product->id) }}">Show</a>
-
- 
-    
-                    <a class="btn btn-primary" href="{{ route('kelas.edit',$product->id) }}">Edit</a>
-   
+                <form action="{{ route('event.destroy',$product->id) }}" method="POST">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
+                        <span class="fa fa-caret-down"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Show</a></li>
+                        <li><a class="btn btn-primary form-control" href="{{ route('event.edit',$product->id) }}">Atur Posisi</a></li>
                     @csrf
                     @method('DELETE')
-      
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                        <li><button type="submit" class="btn btn-danger form-control">Delete</button></li>
+                        <li class="divider"></li>
+                        <li><a class="btn btn-warning form-control" href="{{ route('peopple.addguru',$product->id) }}">Absensi</a></li>
+                      </ul>
+                    </div>
+                  </div>
                 </form>
             </td>
         </tr>
@@ -56,7 +61,7 @@
         @endforeach
     </table>
 <div style="padding-top: 10px;">
-    {{ $kelas->links() }}
+    {{ $event->links() }}
 </div>
 @else
 <div class="card" style="margin-top: 100px;">

@@ -6,7 +6,7 @@
 <?php $i = Auth::user()->daerahs_id ; ?>
 <?php $ds = Auth::user()->desas_id ; ?>
 <?php $kl = Auth::user()->kelompoks_id ; ?>
-@if ($st >=  1 && $st <=  4 )
+@if ($st >=  1 && $st <=  7 )
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
         <div class="col-md-8">

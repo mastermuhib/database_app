@@ -4,7 +4,7 @@
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
 <?php $i = Auth::user()->kelompoks_id ; ?>
-@if ($st ==  2 )
+@if ($st ==  4 )
 <div class="container" style="vertical-align: middle; position: relative;">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,7 +20,7 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-                                <input id="kelompoks_id" type="hidden" name="kelompoks_id" value="<?php echo $i ;?>" >
+                                <input id="kelompoks_id" type="text" name="kelompoks_id" value="<?php echo $i ;?>" >
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>

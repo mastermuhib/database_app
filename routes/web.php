@@ -48,3 +48,7 @@ Route::resource('kelas','KelasController');
 Route::get('/kelas/create', function () {
     return view('/kelas.create');
 });
+Route::resource('event','EventController');
+Route::get('/event/create', function () {
+    return view('/event.create');
+});

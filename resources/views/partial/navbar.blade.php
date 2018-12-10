@@ -9,6 +9,10 @@
          $status = "admin desa";
             }elseif ( $st == 4) {
          $status = "admin kelompok";
+            }elseif ( $st == 5) {
+         $status = "Guru";
+            }elseif ( $st == 6) {
+         $status = "Murid";
             }else {
          $status = "new anggota";
             }
@@ -109,6 +113,19 @@
             <a class="nav-link" href="{{ url('kelas')}}">
               <i class="menu-icon mdi mdi-sticker"></i>
               <span class="menu-title">KELAS</span>
+            </a>
+          </li>
+        <?php } elseif ( $i == 5 ) { ?>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('peopple')}}">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">PEOPLE</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('event')}}">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">EVENTS</span>
             </a>
           </li>
         <?php } else { ?> 
