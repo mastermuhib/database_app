@@ -36,7 +36,8 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {   
-        DB::table('absensi')->truncate();
+        $event_id=$request->get('event_id');
+        DB::table('absensi')->where('absensi.event_id', $event_id)->delete();
         $idsiswa = $request->peopple_id;
 
         foreach ($idsiswa as $ids) {
