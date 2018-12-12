@@ -39,7 +39,7 @@ class EventController extends Controller
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'event.kelompoks_id')
                         ->leftJoin('kelas', 'kelas.id', '=', 'event.kelas_id')
                         ->leftJoin('absensi', 'event.id', '=', 'absensi.event_id')
-                        ->select('event.id as id', 'event.name as name','absensi.status as status','event.created_at as date','desas.name as desa','daerahs.name as daerah','kelompoks.name as kelompok','kelas.name as kelas')->distinct()
+                        ->select('event.id as id', 'event.name as name','absensi.status as status','event.created_at as date','desas.name as desa','kelompoks.name as kelompok','kelas.name as kelas')->distinct()
                         ->orderBy('desa', 'ASC')
                         ->where('event.daerahs_id', '=', $daerah)
                         ->paginate(7);
@@ -48,7 +48,7 @@ class EventController extends Controller
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'event.kelompoks_id')
                         ->leftJoin('kelas', 'kelas.id', '=', 'event.kelas_id')
                         ->leftJoin('absensi', 'event.id', '=', 'absensi.event_id')
-                        ->select('event.id as id', 'event.name as name','absensi.status as status','event.created_at as date','desas.name as desa','daerahs.name as daerah','kelompoks.name as kelompok','kelas.name as kelas')->distinct()
+                        ->select('event.id as id', 'event.name as name','absensi.status as status','event.created_at as date','kelompoks.name as kelompok','kelas.name as kelas')->DISTINCT()
                         ->orderBy('kelompok', 'ASC')
                         ->where('event.desas_id', '=', $desa)
                         ->paginate(7);
@@ -56,7 +56,7 @@ class EventController extends Controller
                         $event = DB::table('event')
                         ->leftJoin('kelas', 'kelas.id', '=', 'event.kelas_id')
                         ->leftJoin('absensi', 'event.id', '=', 'absensi.event_id')
-                        ->select('event.id as id', 'event.name as name','absensi.status as status','event.created_at as date','desas.name as desa','daerahs.name as daerah','kelompoks.name as kelompok','kelas.name as kelas')->distinct()
+                        ->select('event.id as id', 'event.name as name','absensi.status as status','event.created_at as date','kelas.name as kelas')->distinct()
                         ->orderBy('kelas', 'ASC')
                         ->where('event.kelompoks_id', '=', $kelompok)
                         ->paginate(7);
@@ -123,18 +123,70 @@ class EventController extends Controller
     {
      if (Auth::check()) {
      $u = Auth::user()->rules_id ;
+     $daerah = Auth::user()->daerahs_id ;
+     $desa = Auth::user()->desas_id ;
+     $kelompok = Auth::user()->kelompoks_id ;
      $kelas = Auth::user()->kelas_id ;
-       $peopples = DB::table('peopples')
+
+     if ($u == 1) {
+        $peopples = DB::table('peopples')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
                         ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
                         ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
                         ->leftJoin('kelas', 'kelas.id', '=', 'peopples.kelas_id')
                         ->leftJoin('absensi', 'absensi.peopple_id', '=', 'peopples.id')
-                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','absensi.peopple_id as peopple_abs','absensi.event_id as event')->distinct()
-                        ->where('kelas.id','=', $kelas)
-                        ->where('peopples.posisi','=', 2)
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','absensi.peopple_id as peopple_abs','absensi.event_id as event','absensi.status as status')->distinct()
+                        ->where('absensi.event_id','=', $id)
                         ->paginate(7);
         return view('event.show', ['peopples' => $peopples]);
+     } elseif ($u == 2) {
+        $peopples = DB::table('peopples')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                        ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                        ->leftJoin('kelas', 'kelas.id', '=', 'peopples.kelas_id')
+                        ->leftJoin('absensi', 'absensi.peopple_id', '=', 'peopples.id')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','absensi.peopple_id as peopple_abs','absensi.event_id as event','absensi.status as status')->distinct()
+                        ->where('daerahs.id','=', $daerah)
+                        ->paginate(7);
+        return view('event.show', ['peopples' => $peopples]);
+     } elseif ($u == 3) {
+        $peopples = DB::table('peopples')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                        ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                        ->leftJoin('kelas', 'kelas.id', '=', 'peopples.kelas_id')
+                        ->leftJoin('absensi', 'absensi.peopple_id', '=', 'peopples.id')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','absensi.peopple_id as peopple_abs','absensi.event_id as event','absensi.status as status')
+                        ->distinct()
+                        ->where('desas.id','=', $desa)
+                        ->get();
+        return view('event.show', ['peopples' => $peopples]);
+     } elseif ($u == 4) {
+        $peopples = DB::table('peopples')
+                        ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                        ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                        ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                        ->leftJoin('kelas', 'kelas.id', '=', 'peopples.kelas_id')
+                        ->leftJoin('absensi', 'absensi.peopple_id', '=', 'peopples.id')
+                        ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','absensi.peopple_id as peopple_abs','absensi.event_id as event','absensi.status as status')->distinct()
+                        ->where('kelompoks.id','=', $kelompok)
+                        ->paginate(7);
+        return view('event.show', ['peopples' => $peopples]);
+
+     } else {
+         $peopples = DB::table('peopples')
+                            ->leftJoin('daerahs', 'daerahs.id', '=', 'peopples.daerahs_id')
+                            ->leftJoin('desas', 'desas.id', '=', 'peopples.desas_id')
+                            ->leftJoin('kelompoks', 'kelompoks.id', '=', 'peopples.kelompoks_id')
+                            ->leftJoin('kelas', 'kelas.id', '=', 'peopples.kelas_id')
+                            ->leftJoin('absensi', 'absensi.peopple_id', '=', 'peopples.id')
+                            ->select('peopples.id as id','peopples.addres as alamat','daerahs.name as name1','kelompoks.name as name3','peopples.name as name4', 'desas.name as name2','kelas.name as name5','absensi.peopple_id as peopple_abs','absensi.event_id as event','absensi.status as status')->distinct()
+                            ->where('kelas.id','=', $kelas)
+                            ->where('peopples.posisi','=', 2)
+                            ->paginate(7);
+            return view('event.show', ['peopples' => $peopples]);
+    }
     }
     }
 
@@ -181,6 +233,6 @@ class EventController extends Controller
         $event->delete();
   
         return redirect()->route('event.index')
-                        ->with('success','eventt deleted successfully');
+                        ->with('success','event deleted successfully');
     }
 }

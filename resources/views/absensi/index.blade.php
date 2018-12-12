@@ -77,7 +77,7 @@
                         <span class="fa fa-caret-down"></span></button>
                       <ul class="dropdown-menu">
                         <?php if ($product->id > 0 and $product->status == 1 ) { ?>
-                        <li><a class="btn btn-warning form-control" href="{{ route('absensi.show',$product->id) }}">Lihat Rekapan</a></li>
+                        <li><a class="btn btn-warning form-control" href="{{ route('event.show',$product->id) }}">Lihat Rekapan</a></li>
                         <?php } else { ?>
                         <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Absensi</a></li>
                         <?php } ?>

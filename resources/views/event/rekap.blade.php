@@ -9,7 +9,6 @@
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.js')}}"></script>   
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.css')}}"></script>   
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
-    <a class="btn btn-danger" href="{{ route('event.index') }}"> Back</a>
     <form method="POST" action="{{ route('absensi.store') }}">
          @csrf
     <table class="order-table table table-bordered">
@@ -28,19 +27,16 @@
             <td>{{ $product->alamat }}</td>
             <td>{{ $product->name5 }}</td>
              <?php if ( $product->peopple_abs >= 3 and $product->event == Request::segment(2) ) { ?>
-             <td><input type="checkbox" id="uncek" name="peopple_id[]" value="{{ $product->id }}" checked="true"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>
+            <td> Hadir </td>
         <?php } else { ?>
-            <td><input type="checkbox" name="peopple_id[]" value="{{ $product->id }}"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>
+            <td> Tidak Hadir </td>
         <?php } ?>
         </tr>
         <?php $no++; ?>
         @endforeach
     </table>
 <div style="padding-top: 10px;">
-    <div class="pull-right">
-        <button type="submit" class="btn btn-primary" name="submit" value="submit">Simpan Absensi</button> ||
-        <button type="submit" class="btn btn-danger" name="rekap" value ="rekap">Rekap dan Tutup</button>
-    </div>
+    
 </div>
 </form>
 @else

@@ -46,10 +46,11 @@ Route::get ( '/datatable', function () {
     return view ( '/coba.index' );
 } );
 Route::resource('kelas','KelasController');
+Route::get('absensi/{id}','AbsensiController@show');
 Route::get('/kelas/create', function () {
     return view('/kelas.create');
 });
-Route::resource('event','EventController');
+Route::resource('event','EventController')->only(['index','create','show', 'store', 'edit', 'update', 'destroy','rekap']);
 Route::get('/event/create', function () {
     return view('/event.create');
 });

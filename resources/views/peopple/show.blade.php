@@ -6,7 +6,7 @@
 <?php $i = Auth::user()->daerahs_id ; ?>
 <?php $ds = Auth::user()->desas_id ; ?>
 <?php $kl = Auth::user()->kelompoks_id ; ?>
-@if ($st >=  1 && $st <=  4 )
+@if ($st >=  1 && $st <=  7)
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">

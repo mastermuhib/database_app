@@ -66,7 +66,6 @@
                         <span class="fa fa-caret-down"></span></button>
                       <ul class="dropdown-menu">
                         <li><a class="btn btn-info form-control" href="{{ route('peopple.show',$product->id) }}">Show</a></li>
-                        <li><a class="btn btn-success form-control" href="{{ route('peopple.show',$product->id) }}">Absensi</a></li>
                     @csrf
                     @method('DELETE')
                         <li><button type="submit" class="btn btn-danger form-control">Delete</button></li>

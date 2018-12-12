@@ -10,7 +10,7 @@
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.css')}}"></script>   
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
     <a class="btn btn-danger" href="{{ route('event.index') }}"> Back</a>
-    <form method="POST" action="{{ route('absensi.store') }}">
+    <form method="POST" action="">
          @csrf
     <table class="order-table table table-bordered">
         <tr>
@@ -18,7 +18,7 @@
             <th>Name peopple</th>
             <th>Alamat</th>
             <th>Kelas</th>
-            <th>Absensi</th>
+            <th>Keterangan</th>
         </tr>
         <?php $no = 1; ?>
         @foreach ($peopples as $product)
@@ -28,18 +28,31 @@
             <td>{{ $product->alamat }}</td>
             <td>{{ $product->name5 }}</td>
              <?php if ( $product->peopple_abs >= 3 and $product->event == Request::segment(2) ) { ?>
-             <td><input type="checkbox" id="uncek" name="peopple_id[]" value="{{ $product->id }}" checked="true"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>
+            <td style="background-color: #7FFFD4;"> Hadir </td>
         <?php } else { ?>
-            <td><input type="checkbox" name="peopple_id[]" value="{{ $product->id }}"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>
+            <td style="background-color: #FF1493;"> Tidak Hadir </td>
         <?php } ?>
         </tr>
         <?php $no++; ?>
         @endforeach
     </table>
 <div style="padding-top: 10px;">
-    <div class="pull-right">
-        <button type="submit" class="btn btn-primary" name="submit" value="submit">Simpan Absensi</button> ||
-        <button type="submit" class="btn btn-danger" name="rekap" value ="rekap">Rekap dan Tutup</button>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+                <strong>Jumlah Orang   :</strong><span style="margin-left: 20px;">{{$count}}</span>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: -10px;">
+            <div class="form-group">
+                <strong>Hadir   :</strong><span style="margin-left: 20px;">{{$hadir}}</span>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: -10px;">
+            <div class="form-group">
+                <strong>tidak Hadir   :</strong><span style="margin-left: 20px;"> {{$absen}} </span>
+            </div>
+        </div>
     </div>
 </div>
 </form>
