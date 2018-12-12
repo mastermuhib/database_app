@@ -10,6 +10,7 @@ class absensi extends Model
     Protected $fillable = [
         'id',
         'peopple_id', 
+        'status', 
         'event_id'
     ];
 }

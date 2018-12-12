@@ -28,83 +28,52 @@
                                         </select>
                                 </div>
                           </div>       
-                        <?php }elseif ($st == 2 ) { ?>
-                           <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
-                                    <div class="col-md-6">
-                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value='<?php echo $i ;?>'>please klick<?php echo $st;?></option>
-                                                <option value='<?php echo $i ;?>'>please klick this tombol</option>
-                                        </select>
-                                    </div>
-                           </div>
-                        <?php }elseif ($st == 5 ) { ?>
-                                       <input type="hidden" name="daerahs_id" class="form-control" value="<?php echo $i ;?>" placeholder="Name">
                         <?php }else { ?>
-                          <div class="d-lg-none">
-                            <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
-                                    <div class="col-md-6">
-                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value='<?php echo $i ;?>'>please klick<?php echo $st;?></option>
-                                                <option value='<?php echo $i ;?>'>please klick this tombol</option>
-                                        </select>
-                                    </div>
-                           </div>
-                          </div>
+                               <input type="hidden" name="daerahs_id" class="form-control" value="<?php echo $i ;?>" placeholder="Name">
                         <?php } ?>
-                        <?php if ($st == 3 ) {?>
+                        <?php if ($st == 2 ) {?>
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
                                     <div class="col-md-6">
-                                        <select name="desas_id" id="desa" class="form-control"><option value='<?php echo $ds ;?>'>please klick<?php echo $st;?></option>
-                                                <option value='<?php echo $ds ;?>'>please klick this tombol</option>
+                                        <select name="desas_id" id="desa" class="form-control"><option value=''>Pilih Desa</option>
+                                                <?php $desa = DB::table('desas')->where('daerahs_id','=', $i)->get(); ?>
+                                                          @foreach($desa as $product)
+                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                          @endforeach
                                         </select>
                                     </div>
                                 </div>
-                        <?php }elseif ($st == 4 ) { ?>
-                              <div class="d-lg-none">
-                                <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
-                                    <div class="col-md-6">
-                                        <select name="desas_id" id="desa" class="form-control"><option value='<?php echo $ds ;?>'>please klick<?php echo $st;?></option>
-                                                <option value='<?php echo $ds ;?>'>please klick this tombol</option>
-                                        </select>
-                                    </div>
-                                </div>
-                              </div>
-                        <?php }elseif ($st == 5 ) { ?>
-                                       <input type="hidden" name="desas_id" class="form-control" value="<?php echo $ds ;?>" placeholder="Name">
                         <?php }else { ?>
-                                <div class="form-group row">
-                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DESA') }}</label>
-                                        <div class="col-md-6">
-                                            <select name="desas_id" class="form-control" id="desa">
-                                            <option value=''>Pilih Desa</option>
-                                            </select>
-                                        </div>
-                                </div>
+                                       <input type="hidden" name="desas_id" class="form-control" value="<?php echo $ds ;?>" placeholder="Name">
                          <?php } ?> 
-                         <?php if ($st == 4 ) {?>
-                              <div class="d-lg-none">
+                         <?php if ($st == 2 ) {?>
+                              <div class="form-group row">
+                                  <label for="kelompok" class="col-md-4 col-form-label text-md-right">{{ __('KELOMPOK') }}</label>
+                                  <div class="col-md-6">
+                                  <select class="form-control" name="kelompoks_id" id="kelompok">
+                                      <option value=''>Pilih Kelompok</option>
+                                            <!-- @foreach(App\daerah::get() as $daerah)
+                                            <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
+                                            @endforeach -->
+                                  </select>
+                                  </div>
+                              </div>
+                         <?php } elseif ($st == 3 ) {?>
+                              <div class="">
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kelompok') }}</label>
                                           <div class="col-md-6"> 
-                                                <select name="kelompoks_id" class="form-control">
-                                                    <option value='<?php echo $kl ;?>'>Pilih kelompok</option>
+                                                <select name="kelompoks_id" class="form-control"><option value=''>Pilih Kelompok</option>
+                                                   <?php $kelompok = DB::table('kelompoks')->where('desas_id','=', $ds)->get(); ?>
+                                                          @foreach($kelompok as $product)
+                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                          @endforeach
                                                 </select>
                                           </div>
                                     </div>
                               </div>
-                         <?php }elseif ($st == 5 ) { ?>
-                                       <input type="hidden" name="kelompoks_id" class="form-control" value="<?php echo $kl ;?>" placeholder="Name">
                          <?php }else { ?>
-                                    <div class="form-group row">
-                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kelompok') }}</label>
-                                          <div class="col-md-6"> 
-                                                <select name="kelompoks_id" id="kelompok" class="form-control">
-                                                    <option value=''>Pilih kelompok</option>
-                                                </select>
-                                          </div>
-                                    </div>
+                                       <input type="hidden" name="kelompoks_id" class="form-control" value="<?php echo $kl ;?>" placeholder="Name">
                          <?php } ?>
                          <?php if ($st == 4 ) {?>
                                     <div class="form-group row">

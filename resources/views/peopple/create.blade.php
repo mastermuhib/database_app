@@ -27,26 +27,6 @@
                                         </select>
                                 </div>
                           </div>       
-                        <?php }elseif ($st == 2 ) { ?>
-                           <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
-                                    <div class="col-md-6">
-                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value='<?php echo $i ;?>'>please klick<?php echo $st;?></option>
-                                                <option value='<?php echo $i ;?>'>please klick this tombol</option>
-                                        </select>
-                                    </div>
-                           </div>
-                        <?php }else { ?>
-                          <div class="d-lg-none">
-                            <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('DAERAH') }}</label>
-                                    <div class="col-md-6">
-                                        <select name="daerahs_id" id ="daerah" class="form-control"><option value='<?php echo $i ;?>'>please klick<?php echo $st;?></option>
-                                                <option value='<?php echo $i ;?>'>please klick this tombol</option>
-                                        </select>
-                                    </div>
-                           </div>
-                          </div>
                         <?php } ?>
                         <?php if ($st == 3 ) {?>
                                 <div class="form-group row">

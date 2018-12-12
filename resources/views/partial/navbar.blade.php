@@ -70,6 +70,12 @@
               <span class="menu-title">PEOPLE</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('event')}}">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">EVENTS</span>
+            </a>
+          </li>
         <?php } elseif ( $i == 2 ) { ?>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('desa')}}">
@@ -89,6 +95,12 @@
               <span class="menu-title">PEOPLE</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('event')}}">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">EVENTS</span>
+            </a>
+          </li>
         <?php } elseif ( $i == 3 ) { ?>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('kelompok')}}">
@@ -102,6 +114,12 @@
               <span class="menu-title">PEOPLE</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('event')}}">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">EVENTS</span>
+            </a>
+          </li>
         <?php } elseif ( $i == 4 ) { ?>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('peopple')}}">
@@ -113,6 +131,12 @@
             <a class="nav-link" href="{{ url('kelas')}}">
               <i class="menu-icon mdi mdi-sticker"></i>
               <span class="menu-title">KELAS</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('event')}}">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">EVENTS</span>
             </a>
           </li>
         <?php } elseif ( $i == 5 ) { ?>

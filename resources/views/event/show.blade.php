@@ -28,7 +28,7 @@
             <td>{{ $product->name5 }}</td>
             <td>
              <?php if ( $product->peopple_abs >= 1 and $product->event == Request::segment(2) ) { ?>
-            <input type="checkbox" id="uncek" name="peopple_id[]" value="{{ $product->id }}" checked="true" ><input type="hidden" name="event_id" value="{{ Request::segment(2) }}">
+            <input type="checkbox" id="uncek" name="peopple_id[]" value="{{ $product->id }}" checked="true"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}">
         <?php } else { ?>
             <input type="checkbox" name="peopple_id[]" value="{{ $product->id }}"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}">
         <?php } ?>
@@ -39,9 +39,8 @@
     </table>
 <div style="padding-top: 10px;">
     <div class="pull-right">
-            <button type="submit" class="btn btn-primary">
-                        {{ __('Simpan Absensi') }}
-            </button>
+        <button type="submit" class="btn btn-primary" name="submit" value="submit">Simpan Absensi</button> ||
+        <button type="submit" class="btn btn-danger" name="rekap" value ="rekap">Rekap dan Tutup</button>
     </div>
 </div>
 </form>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\absensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class AbsensiController extends Controller
 {
@@ -36,15 +37,27 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {   
+        if(Input::get('submit')) {
         $event_id=$request->get('event_id');
         DB::table('absensi')->where('absensi.event_id', $event_id)->delete();
         $idsiswa = $request->peopple_id;
-
         foreach ($idsiswa as $ids) {
             $student= new \App\absensi; // assume you use this model
             $student->peopple_id = $ids;
             $student->event_id=$request->get('event_id');
             $student->save();
+        }
+        }else if(Input::get('rekap')){
+        $event_id=$request->get('event_id');
+        $status = 1;
+        DB::table('absensi')->where('absensi.event_id', $event_id)->delete();
+        $idsiswa = $request->peopple_id;
+        foreach ($idsiswa as $ids) {
+            $student= new \App\absensi; // assume you use this model
+            $student->peopple_id = $ids;
+            $student->status = $status;
+            $student->event_id=$request->get('event_id');
+            $student->save(); }
     }
 return redirect()->route('event.index')
                         ->with('success','Absensi successfully.');

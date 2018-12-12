@@ -27,16 +27,48 @@
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
     <table class="order-table table table-bordered">
         <tr>
-            <th>NOMOR</th>
-            <th>Name event</th>
+                    <th>NOMOR</th>
+                    <th>Name event</th>
+            <?php if ($st == 1) {?>
+                    <th>Daerah</th>
+                    <th>Desa</th>
+                    <th>Kelompok</th>
+                    <th>Kelas</th>
+            <?php } elseif ($st == 2) {?>
+                    <th>Desa</th>
+                    <th>Kelompok</th>
+                    <th>Kelas</th>
+            <?php } elseif ($st == 3) {?>
+                    <th>Kelompok</th>
+                    <th>Kelas</th>
+            <?php } elseif ($st == 4) {?>
+                    <th>Kelas</th>
+            <?php }else { ?>
+            <?php } ?>
             <th>dibuat Tanggal</th>
             <th width="280px">Action</th>
         </tr>
         <?php $no = 1; ?>
         @foreach ($event as $product)
         <tr>
-            <td>{{ $no }}</td>
-            <td>{{ $product->name }}</td>
+                    <td>{{ $no }}</td>
+                    <td>{{ $product->name }}</td>
+            <?php if ($st == 1) {?>
+                    <td>{{ $product->daerah }}</td>
+                    <td>{{ $product->desa }}</td>
+                    <td>{{ $product->kelompok }}</td>
+                    <td>{{ $product->kelas }}</td>
+            <?php }elseif ($st == 2) { ?>
+                    <td>{{ $product->desa }}</td>
+                    <td>{{ $product->kelompok }}</td>
+                    <td>{{ $product->kelas }}</td>
+            <?php }elseif ($st == 3) { ?>
+                    <td>{{ $product->kelompok }}</td>
+                    <td>{{ $product->kelas }}</td>
+            <?php }elseif ($st == 4) { ?>
+                    <td>{{ $product->kelas }}</td>
+            <?php }else { ?>
+            <?php } ?>
             <td>{{ $product->date }}</td>
             <td>
                 <form action="{{ route('event.destroy',$product->id) }}" method="POST">
@@ -44,7 +76,11 @@
                       <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
                         <span class="fa fa-caret-down"></span></button>
                       <ul class="dropdown-menu">
+                        <?php if ($product->id > 0 and $product->status == 1 ) { ?>
+                        <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Lihat Rekapan</a></li>
+                        <?php } else { ?>
                         <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Absensi</a></li>
+                        <?php } ?>
                         <li><a class="btn btn-primary form-control" href="{{ route('event.edit',$product->id) }}">Atur Posisi</a></li>
                     @csrf
                     @method('DELETE')
