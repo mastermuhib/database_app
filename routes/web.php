@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/getdesa/{id}', 'KelompokController@getdesa');
 Route::get('/getkelompok/{id}', 'PeoppleController@getkelompok');
+Route::get('/getkelas/{id}', 'KelasController@getkelas');
 Route::resource('daerah','DaerahController');
 Route::get('/daerah/create', function () {
     return view('/daerah.create');

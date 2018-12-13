@@ -59,7 +59,7 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
                                           <div class="col-md-6"> 
                                             <select name="desas_id" class="form-control" id="desa">
-                                            <option value=''>Umum satu Desa</option>
+                                            <option value=''>Umum satu Daerah</option>
                                             </select>
                                           </div>
                         </div>
@@ -67,7 +67,7 @@
                         <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
                                           <div class="col-md-6"> 
-                                                <select name="kelas_id" class="form-control">
+                                                <select name="desas_id" id="desa" class="form-control">
                                                     <option value=''>Umum</option>
                                                       <?php $desas = DB::table('desas')->where('daerahs_id','=', $daerah)->get(); ?>
                                                           @foreach($desas as $product)
@@ -90,7 +90,7 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
                                           <div class="col-md-6"> 
                                             <select name="kelompoks_id" class="form-control" id="kelompok">
-                                            <option value=''>Umum satu Kelompok</option>
+                                            <option value=''>Umum satu desa</option>
                                             </select>
                                           </div>
                         </div>
@@ -98,7 +98,7 @@
                         <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
                                           <div class="col-md-6"> 
-                                                <select name="kelas_id" class="form-control">
+                                                <select name="kelompoks_id" id="kelompok" class="form-control">
                                                     <option value=''>Umum</option>
                                                       <?php $kelompok = DB::table('kelompoks')->where('desas_id','=', $desa)->get(); ?>
                                                           @foreach($kelompok as $product)
@@ -116,18 +116,16 @@
                             </div>
                         </div>
                         <?php } ?>
+                        <?php if ($st >= 1 && $st <= 3) { ?>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
+                                          <div class="col-md-6"> 
+                                            <select name="kelas_id" class="form-control" id="kelas">
+                                            <option value=''>Umum satu Kelompok</option>
+                                            </select>
+                                          </div>
                         </div>
+                        <?php } elseif ($st == 4) { ?>
                         <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
                                           <div class="col-md-6"> 
@@ -139,6 +137,21 @@
                                                           @endforeach
                                                 </select>
                                           </div>
+                        </div>
+                        <?php } else { ?>
+                        <input type="hidden" name="kelas_id" class="form-control" value="<?php echo $kelas;?>" placeholder="Name">
+                        <?php } ?>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -190,6 +203,26 @@
                         $(".list-kelompok").remove()
                         for (var i = data.length - 1; i >= 0; i--) {
                             $("#kelompok").append('<option class="list-kelompok" value="'+data[i].id+'">'+data[i].name+'</option>')
+                        } 
+                    }
+               });
+           }
+        });
+    }); 
+   $(document).ready(function() {
+       $('#kelompok').on('change',function(){
+           var kelas = $(this).val(); 
+           if (kelas) {
+                console.log(kelas)
+                $.ajax({
+                    url: '/getkelas/' + kelas,
+                    type: 'GET',
+                    dataType: 'json', // Data yang akan dikirim ke file pemroses
+                    success: function(data) { // Jika berhasil
+                        console.log(data)
+                        $(".list-kelas").remove()
+                        for (var i = data.length - 1; i >= 0; i--) {
+                            $("#kelas").append('<option class="list-kelas" value="'+data[i].id+'">'+data[i].name+'</option>')
                         } 
                     }
                });

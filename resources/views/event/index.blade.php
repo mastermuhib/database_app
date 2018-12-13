@@ -53,25 +53,49 @@
         </tr>
         <?php $no = 1; ?>
         @foreach ($event as $product)
+        <?php if ( $product->daerah == NULL) {
+                   $daerah = "UMUM";
+             } else {
+                   $daerah = $product->daerah;
+             } 
+        ?>
+        <?php if ( $product->desa == NULL) {
+                   $desa = "UMUM";
+             } else {
+                   $desa = $product->desa;
+             } 
+        ?>
+        <?php if ( $product->kelompok == NULL) {
+                   $kelompok = "UMUM";
+             } else {
+                   $kelompok = $product->kelompok;
+             } 
+        ?>
+        <?php if ( $product->kelas == NULL) {
+                   $kelas = "UMUM";
+             } else {
+                   $kelas = $product->kelas;
+             } 
+        ?>
         <tr>
                     <td>{{ $no }}</td>
                     <td>{{ $product->name }}
                         
                     </td>
             <?php if ($st == 1) {?>
-                    <td>{{ $product->daerah }}</td>
-                    <td>{{ $product->desa }}</td>
-                    <td>{{ $product->kelompok }}</td>
-                    <td>{{ $product->kelas }}</td>
+                    <td>{{ $daerah }}</td>
+                    <td>{{ $desa }}</td>
+                    <td>{{ $kelompok }}</td>
+                    <td>{{ $kelas }}</td>
             <?php }elseif ($st == 2) { ?>
-                    <td>{{ $product->desa }}</td>
-                    <td>{{ $product->kelompok }}</td>
-                    <td>{{ $product->kelas }}</td>
+                    <td>{{ $desa }}</td>
+                    <td>{{ $kelompok }}</td>
+                    <td>{{ $kelas }}</td>
             <?php }elseif ($st == 3) { ?>
-                    <td>{{ $product->kelompok }}</td>
-                    <td>{{ $product->kelas }}</td>
+                    <td>{{ $kelompok }}</td>
+                    <td>{{ $kelas }}</td>
             <?php }elseif ($st == 4) { ?>
-                    <td>{{ $product->kelas }}</td>
+                    <td>{{ $kelas }}</td>
             <?php }else { ?>
             <?php } ?>
             <td>{{ $product->date }}</td>
@@ -87,14 +111,16 @@
                   <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
                     <span class="fa fa-caret-down"></span></button>
                        <ul class="dropdown-menu">
-                        <li><button type="submit" id ="aktifkan" class="btn btn-success form-control">Aktifkan</button></li>
-                </form>
-                <form action="{{ route('event.destroy',$product->id) }}" method="POST">
-                        <li><a class="btn btn-warning form-control" href="{{ route('absensi.show',$product->id) }}">Lihat Rekapan</a></li>
-                      
+                    <?php if ( $product->event > 0 && $product->status == NULL ) { ?>
                         <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Absensi</a></li>
-                        
-                        <li><a class="btn btn-primary form-control" href="{{ route('event.edit',$product->id) }}">Atur Posisi</a></li>
+                    <?php } elseif ( $product->event > 0 && $product->status != NULL ) { ?>
+                         <li><a class="btn btn-warning form-control" href="{{ route('absensi.show',$product->id) }}">Lihat Rekapan</a></li>
+                    <?php } else { ?>
+                         <li><button type="submit" id ="aktifkan" class="btn btn-success form-control">Aktifkan</button></li>
+                    <?php } ?>
+                </form>
+                <form action="{{ route('event.destroy',$product->id) }}" method="POST">                       
+                        <li><a class="btn btn-primary form-control" href="{{ route('event.edit',$product->id) }}">Edit event</a></li>
                     @csrf
                     @method('DELETE')
                         <li><button type="submit" class="btn btn-danger form-control">Delete</button></li>

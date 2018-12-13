@@ -45,6 +45,15 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getkelas($id)
+    { 
+        $kelas = DB::table('kelas')
+         ->select('name','id')
+         ->WHERE('kelompoks_id',$id)->get();
+
+        return json_encode($kelas);
+    }
+
     public function create()
     {
        return view('kelas.create');
