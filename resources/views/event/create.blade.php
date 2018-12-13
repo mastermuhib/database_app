@@ -77,6 +77,14 @@
                                           </div>
                         </div>
                         <?php } else { ?>
+                        <div class="form-group row d-none">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('desa id') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="desa_id" type="text" class="form-control" name="desas_id" value="<?php echo $desa;?>">
+                            </div>
+                        </div>
+                        <?php } ?>
                         <?php if ($st == 1 or $st == 2) { ?>
                         <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
@@ -86,14 +94,20 @@
                                             </select>
                                           </div>
                         </div>
-                        <div class="form-group row d-none">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('desa id') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="desa_id" type="text" class="form-control" name="desas_id" value="<?php echo $desa;?>">
-                            </div>
+                        <?php } elseif ($st == 3) { ?>
+                        <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="kelas_id" class="form-control">
+                                                    <option value=''>Umum</option>
+                                                      <?php $kelompok = DB::table('kelompoks')->where('desas_id','=', $desa)->get(); ?>
+                                                          @foreach($kelompok as $product)
+                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                          @endforeach
+                                                </select>
+                                          </div>
                         </div>
-                        <?php } ?>
+                        <?php } else { ?>
                         <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('kelompok id') }}</label>
 
@@ -101,6 +115,7 @@
                                 <input id="kelompok_id" type="text" class="form-control" name="kelompoks_id" value="<?php echo $kelompok;?>">
                             </div>
                         </div>
+                        <?php } ?>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
