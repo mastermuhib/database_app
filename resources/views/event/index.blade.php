@@ -28,8 +28,6 @@
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.js')}}"></script>   
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.css')}}"></script>   
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
-    <form method="POST" action="{{ route('absensi.store') }}">
-         @csrf
     <table class="order-table table table-bordered">
         <tr>
                     <th>NOMOR</th>
@@ -47,7 +45,7 @@
                     <th>Kelompok</th>
                     <th>Kelas</th>
             <?php } elseif ($st == 4) {?>
-                    <th>Kelas</th>
+                    <th>Kategori</th>
             <?php }else { ?>
             <?php } ?>
             <th>dibuat Tanggal</th>
@@ -58,11 +56,7 @@
         <tr>
                     <td>{{ $no }}</td>
                     <td>{{ $product->name }}
-                         <input type="hidden" name="daerah_id" value="{{ $product->iddaerah }}">
-                         <input type="hidden" name="desa_id" value="{{ $product->iddesa }}">
-                         <input type="hidden" name="kelompok_id" value="{{ $product->idkelompok }}">
-                         <input type="text" name="kelas_id" value="{{ $product->idkelas }}">
-                         <input type="text" name="event_id" value="{{ $product->id }}">
+                        
                     </td>
             <?php if ($st == 1) {?>
                     <td>{{ $product->daerah }}</td>
@@ -82,18 +76,24 @@
             <?php } ?>
             <td>{{ $product->date }}</td>
             <td>
+                <form method="POST" action="{{ route('absensi.store') }}">
+                @csrf
+                 <input type="hidden" name="daerah_id" value="{{ $product->iddaerah }}">
+                         <input type="hidden" name="desa_id" value="{{ $product->iddesa }}">
+                         <input type="hidden" name="kelompok_id" value="{{ $product->idkelompok }}">
+                         <input type="hidden" name="kelas_id" value="{{ $product->idkelas }}">
+                         <input type="hidden" name="event_id" id="event_id" value="{{ $product->id }}">
                 <div class="input-group-btn">
                   <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
                     <span class="fa fa-caret-down"></span></button>
                        <ul class="dropdown-menu">
-                        <li><button type="submit" class="btn btn-success form-control">Aktifkan</button></li>
+                        <li><button type="submit" id ="aktifkan" class="btn btn-success form-control">Aktifkan</button></li>
                 </form>
                 <form action="{{ route('event.destroy',$product->id) }}" method="POST">
-                        <?php if ($product->id > 0 and $product->status == 1 ) { ?>
                         <li><a class="btn btn-warning form-control" href="{{ route('absensi.show',$product->id) }}">Lihat Rekapan</a></li>
-                        <?php } else { ?>
+                      
                         <li><a class="btn btn-info form-control" href="{{ route('event.show',$product->id) }}">Absensi</a></li>
-                        <?php } ?>
+                        
                         <li><a class="btn btn-primary form-control" href="{{ route('event.edit',$product->id) }}">Atur Posisi</a></li>
                     @csrf
                     @method('DELETE')

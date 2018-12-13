@@ -32,12 +32,59 @@
                                 @endif
                             </div>
                         </div>
+                        <?php if ($st == 1) { ?>
+                        <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="derahs_id" id="daerah" class="form-control">
+                                                    <option value=''>Umum</option>
+                                                        <option value='' style="background-color: yellow;" disabled="disabled"><center>--atau pilih kota--</center></option>
+                                                           @foreach(App\daerah::get() as $daerah)
+                                                           <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
+                                                           @endforeach
+                                                </select>
+                                          </div>
+                        </div>
+                        <?php } else { ?>
                         <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('daerah id') }}</label>
 
                             <div class="col-md-6">
                                 <input id="daerah_id" type="hidden" class="form-control" name="daerahs_id" value="<?php echo $daerah;?>">
                             </div>
+                        </div>
+                        <?php } ?>
+                        <?php if ($st == 1) { ?>
+                        <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
+                                          <div class="col-md-6"> 
+                                            <select name="desas_id" class="form-control" id="desa">
+                                            <option value=''>Umum satu Desa</option>
+                                            </select>
+                                          </div>
+                        </div>
+                        <?php } elseif ($st == 2) { ?>
+                        <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="kelas_id" class="form-control">
+                                                    <option value=''>Umum</option>
+                                                      <?php $desas = DB::table('desas')->where('daerahs_id','=', $daerah)->get(); ?>
+                                                          @foreach($desas as $product)
+                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                          @endforeach
+                                                </select>
+                                          </div>
+                        </div>
+                        <?php } else { ?>
+                        <?php if ($st == 1 or $st == 2) { ?>
+                        <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
+                                          <div class="col-md-6"> 
+                                            <select name="kelompoks_id" class="form-control" id="kelompok">
+                                            <option value=''>Umum satu Kelompok</option>
+                                            </select>
+                                          </div>
                         </div>
                         <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('desa id') }}</label>
@@ -46,6 +93,7 @@
                                 <input id="desa_id" type="text" class="form-control" name="desas_id" value="<?php echo $desa;?>">
                             </div>
                         </div>
+                        <?php } ?>
                         <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('kelompok id') }}</label>
 
@@ -76,7 +124,7 @@
                                                           @endforeach
                                                 </select>
                                           </div>
-                                    </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

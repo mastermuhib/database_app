@@ -17,17 +17,26 @@
             <th>NOMOR</th>
             <th>Name peopple</th>
             <th>Alamat</th>
-            <th>Kelas</th>
+            <th>status</th>
             <th>Absensi</th>
         </tr>
         <?php $no = 1; ?>
         @foreach ($peopples as $product)
+        <?php $posisi = $product->posisi ;
+          if ($posisi == 1) {
+              $posisi = "guru";
+          } elseif ($posisi == 2) {
+              $posisi = "murid";
+          } else {
+              $posisi = "Netral";
+          }
+        ?>
         <tr>
             <td>{{ $no }}</td>
-            <td>{{ $product->name4 }}</td>
+            <td>{{ $product->name }}</td>
             <td>{{ $product->alamat }}</td>
-            <td>{{ $product->name5 }}</td>
-             <?php if ( $product->peopple_abs >= 1 and $product->event == Request::segment(2) ) { ?>
+            <td>{{ $posisi }}</td>
+             <?php if ( $product->hadir != NULL ) { ?>
              <td><input type="checkbox" id="uncek" name="peopple_id[]" value="{{ $product->id }}" checked="true"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>
         <?php } else { ?>
             <td><input type="checkbox" name="peopple_id[]" value="{{ $product->id }}"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>
