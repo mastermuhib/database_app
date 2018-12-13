@@ -3,7 +3,10 @@
 @if (Route::has('login'))
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
-<?php $i = Auth::user()->kelompoks_id ; ?>
+<?php $daerah = Auth::user()->daerahs_id ; ?>
+<?php $desa = Auth::user()->desas_id ; ?>
+<?php $kelompok = Auth::user()->kelompoks_id ; ?>
+<?php $kelas = Auth::user()->kelas_id ; ?>
 @if ($st >=  1 && $st <=  8 )
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -25,6 +28,8 @@
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.js')}}"></script>   
 <script type="text/javascript" async="" src="{{asset('assets/DataTables/datatables.css')}}"></script>   
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="search" style="float: right;" />
+    <form method="POST" action="{{ route('absensi.store') }}">
+         @csrf
     <table class="order-table table table-bordered">
         <tr>
                     <th>NOMOR</th>
@@ -52,7 +57,13 @@
         @foreach ($event as $product)
         <tr>
                     <td>{{ $no }}</td>
-                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->name }}
+                         <input type="hidden" name="daerah_id" value="{{ $product->iddaerah }}">
+                         <input type="hidden" name="desa_id" value="{{ $product->iddesa }}">
+                         <input type="hidden" name="kelompok_id" value="{{ $product->idkelompok }}">
+                         <input type="text" name="kelas_id" value="{{ $product->idkelas }}">
+                         <input type="text" name="event_id" value="{{ $product->id }}">
+                    </td>
             <?php if ($st == 1) {?>
                     <td>{{ $product->daerah }}</td>
                     <td>{{ $product->desa }}</td>
@@ -71,11 +82,13 @@
             <?php } ?>
             <td>{{ $product->date }}</td>
             <td>
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
+                    <span class="fa fa-caret-down"></span></button>
+                       <ul class="dropdown-menu">
+                        <li><button type="submit" class="btn btn-success form-control">Aktifkan</button></li>
+                </form>
                 <form action="{{ route('event.destroy',$product->id) }}" method="POST">
-                    <div class="input-group-btn">
-                      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
-                        <span class="fa fa-caret-down"></span></button>
-                      <ul class="dropdown-menu">
                         <?php if ($product->id > 0 and $product->status == 1 ) { ?>
                         <li><a class="btn btn-warning form-control" href="{{ route('absensi.show',$product->id) }}">Lihat Rekapan</a></li>
                         <?php } else { ?>

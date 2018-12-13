@@ -27,7 +27,7 @@
             <td>{{ $product->name4 }}</td>
             <td>{{ $product->alamat }}</td>
             <td>{{ $product->name5 }}</td>
-             <?php if ( $product->peopple_abs >= 3 and $product->event == Request::segment(2) ) { ?>
+             <?php if ( $product->peopple_abs >= 1 and $product->event == Request::segment(2) ) { ?>
              <td><input type="checkbox" id="uncek" name="peopple_id[]" value="{{ $product->id }}" checked="true"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>
         <?php } else { ?>
             <td><input type="checkbox" name="peopple_id[]" value="{{ $product->id }}"><input type="hidden" name="event_id" value="{{ Request::segment(2) }}"></td>

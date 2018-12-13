@@ -13,13 +13,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Menambahkan daerah') }} || <a class="btn btn-danger" href="{{ route('event.index') }}"> Back</a></div>
+                <div class="card-header">{{ __('Menambahkan events') }} || <a class="btn btn-danger" href="{{ route('event.index') }}"> Back</a></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('event.store') }}">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('User ID') }}</label>
 
                             <div class="col-md-6">
@@ -32,32 +32,25 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('daerah id') }}</label>
 
                             <div class="col-md-6">
-                                <input id="daerah_id" type="text" class="form-control" name="daerahs_id" value="<?php echo $daerah;?>">
+                                <input id="daerah_id" type="hidden" class="form-control" name="daerahs_id" value="<?php echo $daerah;?>">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('desa id') }}</label>
 
                             <div class="col-md-6">
                                 <input id="desa_id" type="text" class="form-control" name="desas_id" value="<?php echo $desa;?>">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('kelompok id') }}</label>
 
                             <div class="col-md-6">
                                 <input id="kelompok_id" type="text" class="form-control" name="kelompoks_id" value="<?php echo $kelompok;?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('kelas id') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="kelas_id" type="text" class="form-control" name="kelas_id" value="<?php echo $kelas;?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -72,6 +65,18 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
+                                          <div class="col-md-6"> 
+                                                <select name="kelas_id" class="form-control">
+                                                    <option value=''>Umum</option>
+                                                      <?php $kelas = DB::table('kelas')->where('kelompoks_id','=', $kelompok)->get(); ?>
+                                                          @foreach($kelas as $product)
+                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                          @endforeach
+                                                </select>
+                                          </div>
+                                    </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
