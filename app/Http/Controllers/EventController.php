@@ -43,7 +43,7 @@ class EventController extends Controller
                         ->select('event.id as id', 'event.name as name','absensi.event_id as event','absensi.status as status','event.created_at as date','desas.name as desa','daerahs.name as daerah','kelompoks.name as kelompok','kelas.name as kelas','desas.id as iddesa','daerahs.id as iddaerah','kelompoks.id as idkelompok','kelas.id as idkelas')->distinct()
                         ->orderBy('desa', 'ASC')
                         ->where('event.daerahs_id', '=', $daerah)
-                        ->paginate(7);
+                        ->get();
             } elseif ($u == 3){
                          $event = DB::table('event')
                         ->leftJoin('daerahs', 'daerahs.id', '=', 'event.daerahs_id')

@@ -1,5 +1,6 @@
 @extends('layouts.apps') 
 @section('content')
+<?php use Illuminate\Support\Facades\DB; ?>
 @if (Route::has('login'))
 @auth
 <?php $st = Auth::user()->rules_id ; ?>
@@ -46,10 +47,19 @@
         @endforeach
     </table>
 <div style="padding-top: 10px;">
+  <?php $pages = DB::table('absensi')->select('absensi.status')->distinct()->where('absensi.event_id','=', Request::segment(2))->get();?>
+     @foreach ($pages as $product)
+    <?php if ($product->status == NULL) { ?> 
     <div class="pull-right">
-        <button type="submit" class="btn btn-primary" name="submit" value="submit">Simpan Absensi</button> ||
+        <button type="submit" class="btn btn-primary" name="save" value="save">Simpan Absensi</button> ||
         <button type="submit" class="btn btn-danger" name="rekap" value ="rekap">Rekap dan Tutup</button>
     </div>
+    <?php }else { ?>
+        <div class="pull-right">
+           Telah terekap
+        </div>
+    <?php } ?>
+    @endforeach
 </div>
 </form>
 @else
@@ -82,12 +92,4 @@
 @endsection
 <script type="text/javascript" async="" src="{{asset('assets/js/jquery3.js')}}"></script>   
 <script>
-$(document).ready(function(){
-    
-    $("#uncek").click(function () {
-        
-    console.log("berhasil")     
-    }); 
-        
-  });    
 </script>

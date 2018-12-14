@@ -26,7 +26,7 @@ Route::get('/daerah/create', function () {
     return view('/daerah.create');
 });
 Route::resource('desa','DesaController');
-Route::resource('absensi','AbsensiController');
+Route::resource('absensi','AbsensiController')->only(['index','create','show', 'store', 'edit', 'update', 'destroy','addguru']);
 Route::get('/desa/create', function () {
     return view('/desa.create');
 });

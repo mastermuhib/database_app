@@ -17,17 +17,15 @@
             <th>NOMOR</th>
             <th>Name peopple</th>
             <th>Alamat</th>
-            <th>Kelas</th>
             <th>Keterangan</th>
         </tr>
         <?php $no = 1; ?>
         @foreach ($peopples as $product)
         <tr>
             <td>{{ $no }}</td>
-            <td>{{ $product->name4 }}</td>
+            <td>{{ $product->p_name }}</td>
             <td>{{ $product->alamat }}</td>
-            <td>{{ $product->name5 }}</td>
-             <?php if ( $product->peopple_abs >= 3 and $product->event == Request::segment(2) ) { ?>
+             <?php if ( $product->abs == 1 ) { ?>
             <td style="background-color: #7FFFD4;"> Hadir </td>
         <?php } else { ?>
             <td style="background-color: #FF1493;"> Tidak Hadir </td>

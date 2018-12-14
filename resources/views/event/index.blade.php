@@ -116,7 +116,8 @@
                     <?php } elseif ( $product->event > 0 && $product->status != NULL ) { ?>
                          <li><a class="btn btn-warning form-control" href="{{ route('absensi.show',$product->id) }}">Lihat Rekapan</a></li>
                     <?php } else { ?>
-                         <li><button type="submit" id ="aktifkan" class="btn btn-success form-control">Aktifkan</button></li>
+                         <li><button type="submit" class="btn btn-success form-control" name="submit" value="submit">Aktifkan</button></li>
+                         
                     <?php } ?>
                 </form>
                 <form action="{{ route('event.destroy',$product->id) }}" method="POST">                       
@@ -134,7 +135,6 @@
         @endforeach
     </table>
 <div style="padding-top: 10px;">
-    {{ $event->links() }}
 </div>
 @else
 <div class="card" style="margin-top: 100px;">
