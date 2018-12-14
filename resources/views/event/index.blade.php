@@ -102,7 +102,7 @@
             <td>
                 <form method="POST" action="{{ route('absensi.store') }}">
                 @csrf
-                 <input type="hidden" name="daerah_id" value="{{ $product->iddaerah }}">
+                         <input type="hidden" name="daerah_id" value="{{ $product->iddaerah }}">
                          <input type="hidden" name="desa_id" value="{{ $product->iddesa }}">
                          <input type="hidden" name="kelompok_id" value="{{ $product->idkelompok }}">
                          <input type="hidden" name="kelas_id" value="{{ $product->idkelas }}">

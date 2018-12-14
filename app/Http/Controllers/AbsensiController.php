@@ -80,6 +80,15 @@ class AbsensiController extends Controller
                         $student->peopple_id =  $ids->id ;
                         $student->event_id=$request->get('event_id');
                         $student->save(); }
+            } elseif ($daerah_id == NULL ) {
+                    $idsiswa = DB::table('peopples')
+                                         ->select('peopples.id as id','peopples.name')
+                                         ->get();
+                    foreach ($idsiswa as $ids) {
+                        $student= new \App\absensi; 
+                        $student->peopple_id =  $ids->id ;
+                        $student->event_id=$request->get('event_id');
+                        $student->save(); }
             }
             return redirect()->route('event.index')
                             ->with('success','Event sukses diaktifkan.');

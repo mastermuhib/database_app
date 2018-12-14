@@ -36,11 +36,11 @@
                         <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
                                           <div class="col-md-6"> 
-                                                <select name="derahs_id" id="daerah" class="form-control">
+                                                <select name="daerahs_id" id="daerah" class="form-control">
                                                     <option value=''>Umum</option>
                                                         <option value='' style="background-color: yellow;" disabled="disabled"><center>--atau pilih kota--</center></option>
                                                            @foreach(App\daerah::get() as $daerah)
-                                                           <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
+                                                              <option value='{{ $daerah->id }}'>{{ $daerah->name }}</option>
                                                            @endforeach
                                                 </select>
                                           </div>
@@ -59,11 +59,11 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
                                           <div class="col-md-6"> 
                                             <select name="desas_id" class="form-control" id="desa">
-                                            <option value=''>Umum satu Daerah</option>
+                                              <option value=''>Umum satu Daerah</option>
                                             </select>
                                           </div>
                         </div>
-                        <?php } elseif ($st == 2) { ?>
+                        <?php } elseif ( $st == 2) { ?>
                         <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
                                           <div class="col-md-6"> 
@@ -71,7 +71,7 @@
                                                     <option value=''>Umum</option>
                                                       <?php $desas = DB::table('desas')->where('daerahs_id','=', $daerah)->get(); ?>
                                                           @foreach($desas as $product)
-                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                            <option value='{{ $product->id }}'>{{ $product->name }}</option>
                                                           @endforeach
                                                 </select>
                                           </div>
@@ -79,7 +79,6 @@
                         <?php } else { ?>
                         <div class="form-group row d-none">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('desa id') }}</label>
-
                             <div class="col-md-6">
                                 <input id="desa_id" type="text" class="form-control" name="desas_id" value="<?php echo $desa;?>">
                             </div>
@@ -90,7 +89,7 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
                                           <div class="col-md-6"> 
                                             <select name="kelompoks_id" class="form-control" id="kelompok">
-                                            <option value=''>Umum satu desa</option>
+                                               <option value=''>Umum satu desa</option>
                                             </select>
                                           </div>
                         </div>
@@ -102,7 +101,7 @@
                                                     <option value=''>Umum</option>
                                                       <?php $kelompok = DB::table('kelompoks')->where('desas_id','=', $desa)->get(); ?>
                                                           @foreach($kelompok as $product)
-                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                             <option value='{{ $product->id }}'>{{ $product->name }}</option>
                                                           @endforeach
                                                 </select>
                                           </div>
@@ -121,7 +120,7 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
                                           <div class="col-md-6"> 
                                             <select name="kelas_id" class="form-control" id="kelas">
-                                            <option value=''>Umum satu Kelompok</option>
+                                                <option value=''>Umum satu Kelompok</option>
                                             </select>
                                           </div>
                         </div>
@@ -133,7 +132,7 @@
                                                     <option value=''>Umum</option>
                                                       <?php $kelas = DB::table('kelas')->where('kelompoks_id','=', $kelompok)->get(); ?>
                                                           @foreach($kelas as $product)
-                                                          <option value='{{ $product->id }}'>{{ $product->name }}</option>
+                                                             <option value='{{ $product->id }}'>{{ $product->name }}</option>
                                                           @endforeach
                                                 </select>
                                           </div>
