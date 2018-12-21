@@ -152,8 +152,9 @@
                               <div class="col-md-6">
                                 <select class="form-control" name="kelas_id" id="kelas">
                                       <option value='{{ $peopple->kelas_id }}'>Pilih Kelas</option>
-                                      @foreach(App\kelas::get() as $kelas)
-                                      <option value='{{ $kelas->id }}'>{{ $kelas->name }}</option>
+                                      <?php $kelas = DB::table('kelas')->where('kelompoks_id','=', $i)->get(); ?>
+                                      @foreach($kelas as $product)
+                                      <option value='{{ $product->id }}'>{{ $product->name }}</option>
                                       @endforeach
                                 </select>
                               </div>
